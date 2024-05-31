@@ -1,8 +1,8 @@
-# Primera entrega para CoderHouse.
-Bueno, mi intención es hacer una calculadora e ir agregando otros cálculos para facilitar cosas, como por ejemplo:
+# Primera Entrega Para CoderHouse "JavaScript".  
+De momento, es muy simple todo, cálculos muy básicos.  Mi intención a futuro, es hacer una página interactiva para niños muy linda y llamativa, con explicaciones matemáticas luego los Ejercicios interactivos... Vamos, en mi mente brilla jaja.  
 
-
-### Calcular cuánto me cobra en total en intereses un banco por X cosa, un préstamo, una compra en cuotas...
-
-
-## Supongo que con el tiempo se me ocurrirán más cosas para calcular, por ahora solo tengo en mente lo de la clase, que fue hacer 2 horas xD
+### Respecto a lo técnico.  Cumple con lo pedido para la primera entrega:  
+Tiene Variables y Condicionales If- else if- else.  
+Todas son funciones, nada esta suelto.  
+Y un solo bucle, que sirve para buscar Factores.  
+Como Extra, agregué Botones para cada Operación en HTML.
