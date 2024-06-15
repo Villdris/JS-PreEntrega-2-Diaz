@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 1000px;
+    background-image: linear-gradient(to right bottom, #146bc8, #a15cc0, #e64895, #ff5958, #ee870a);
+    font-family: "Biryani", sans-serif;
+}
+
+header {
+    height: 500px;
+    background-image:url(../assets/juguetes.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    font-weight: 900;
+    font-size: 4rem;
+    color: #2b003f;
+    background-image:  linear-gradient(rgba(14, 96, 151, 0.6), rgba(255, 90, 8, 0));
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+    padding: 0 10px 0 10px;
+}
+header p{
+    color: #422400;
+    background-image:  linear-gradient(rgba(14, 96, 151, 0), rgba(255, 90, 8, 0.6));
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 20px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+}
+
+main {
+    background-color: #146bc82d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 30px;
+    padding: 30px;
+    margin: 20px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border: 3px solid #2b003f;
+}
+
+main button{
+        color: #422400;
+        border: 4px solid rgb(216, 2, 134);
+        border-radius: 20px;
+        padding: 18px 36px;
+        display: inline-block;
+        font-size: 14px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        box-shadow: inset 0 0 0 0 #D80286;
+        -webkit-transition: ease-out 0.4s;
+        -moz-transition: ease-out 0.4s;
+        transition: ease-out 0.4s;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+}
+.slide_right:hover {
+    box-shadow: inset 400px 0 0 0 #D80286;
+    }
