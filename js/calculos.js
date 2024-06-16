@@ -1,69 +1,124 @@
-function funcionSumarRestar(){
-    alert('Has elegido Suma y Resta');
-
-    let numSum0 = parseFloat(prompt('ingresa un Numero'));
-    let numSum1 = parseFloat(prompt('Ahora Otro'));
+//Sinceramente no supe como implementar un objeto en alguna de las operaciones.
+//Al ver la clase de objetos otravez, pensé en crear un constructor con todas las operaciones.
+//De esta forma, solo tengo que llamarlas... La varieble es "resultados" ese es el objeto.
+//De momento es solo un objeto, ya que está dentro de funciones, vive y muere dentro de las funciones.
+//y tambien sé, que no hace falta explicarle esto, con solo verlo ya sabe lo que pasa.
+//es para que usted sepa que yo sé  :D :D :D
+class ClassCalculos {
+    constructor (num,num1){
+        this.num= num;
+        this.num1= num1;
+    }
     
-    if (isNaN(numSum0) || isNaN(numSum1)){
-        alert('Eso no es un numero. Menos 10 puntos');
+    sumar(){
+        return this.num+this.num1;
+    }
+    restar(){
+        return this.num - this.num1
+    }
+    multiplicar(){
+        return this.num* this.num1
+    }
+    dividir(){
+        return this.num / this.num1
+    }
+    elResto(){
+        return this.num % this.num1
+    }
+    factores(){ // aquí tenia un error y tarde un monton, me recomí la cabeza
+                // y era que, olvidé poner this. antes de num :c AHORA FUNCIONA!!
+        let arrayFactores = [];
+        
+        for (let i = 1; i <= this.num; i++){
+
+            let buscando = this.num % i;
+    
+            if (buscando === 0){
+                arrayFactores.push(i);
+            }
+        } return arrayFactores.join(' - ');
+    }
+}
+
+function funcionSumar(){
+    alert('Has elegido Sumar dos numeros');
+
+    //cambie todos los parseFloat por parseInt
+    //al ser una web para niños, solo deberian ser numeros enteros
+    //no habian tantos parseFloat xD
+    let num = parseInt(prompt('Primer numero a sumar'));
+    let num1 = parseInt(prompt('Segundo numero a sumar'));
+
+    if (isNaN(num) || isNaN(num1)){
+        alert('-ERROR: No es un numero');
     } else{
-        let resultadoSuma = numSum0 + numSum1;
-        let resultadoResta = numSum0 - numSum1;
-        alert('Tus Numeros '+numSum0+' y '+numSum1+' Suman '+resultadoSuma);
-        alert('La Resta de '+numSum0+' y '+numSum1+' Dan '+resultadoResta);
+        let resultado = new ClassCalculos(num,num1)
+        alert('Tus Numeros '+num+' y '+num1+' Suman '+resultado.sumar());
+    }
+}
+
+function funcionRestar(){
+    alert('Has elegido Restar dos numeros');
+
+    let num = parseInt(prompt('Primer numero a Restar'));
+    let num1 = parseInt(prompt('Segundo numero a Restar'));
+    
+    if (isNaN(num) || isNaN(num1)){
+        alert('-ERROR- *Eso no es un numero*');
+    } else{
+        let resultado = new ClassCalculos(num,num1)
+        alert('Tus Numeros '+num+' y '+num1+' Restan '+resultado.restar());
     }
 }
 
 function funcionMultiplicar(){
     alert('Vamos a Multiplicar');
     
-    let numMulti0 = parseFloat(prompt('Dame un numero'));
-    let numMulti1 = parseFloat(prompt('Dame otro'));
+    let num = parseInt(prompt('Dame un numero'));
+    let num1 = parseInt(prompt('Dame otro'));
 
-    if (isNaN(numMulti0) || isNaN(numMulti1)){
+    if (isNaN(num) || isNaN(num1)){
         alert('Esto no es Algebra. Menos 10 puntos');
     } else{
-        let resultadoMulti = numMulti0 * numMulti1;
-        alert('La Multiplicación de '+numMulti0+' por '+numMulti1+' son '+resultadoMulti);
+        let resultado = new ClassCalculos(num,num1);
+        alert('La Multiplicación de '+num+' por '+num1+' son '+resultado.multiplicar());
     }
 }
 
 function funcionDividir(){
     alert('A dividir entonces');
     
-    let numDiv0 = parseInt(prompt('Numerito? Por Favor.'));
-    let numDiv1 = parseInt(prompt('Me da Otro?.'));
+    let num = parseInt(prompt('Numerito? Por Favor.'));
+    let num1 = parseInt(prompt('Me da Otro?.'));
 
-    if (isNaN(numDiv0) || isNaN(numDiv1)){
+    if (isNaN(num) || isNaN(num1)){
         alert('ERROR--Letra Detectada--ERROR');
-    } else if (numDiv0 === 0 || numDiv1 === 0) {
-        alert('Quieres destruir tu PC? No puedes dividir entre Cero, por que es Infinito');
+    } else if (num === 0 || num1 === 0) {
+        alert('No puedes dividir entre Cero, por que es Infinito');
     } else{
-        let resultadoDiv = Math.trunc(numDiv0 / numDiv1);
-        let loQueSobra = numDiv0 % numDiv1;
-        alert('La Division de '+numDiv0+' partido en '+numDiv1+' dan '+resultadoDiv+' y sobran '+loQueSobra);
+        let resultado = new ClassCalculos(num,num1);
+        alert('La Division de '+num+' partido en '+num1+' dan '+Math.trunc(resultado.dividir())+
+                ' y sobran '+resultado.elResto());
     }
 }
+// Por razones que desconozco, comenzó a realizar mal las divisiones
+//  Ej: 15 / 2 = 7.5 Esto es Imposible, asi que use math.trunc para eliminar los decimales
+// RARO CIERTO O.O
 
 function funcionFactores(){
     alert('Has elegido encontrar Factores');
 
-    let numFac0 = parseFloat(prompt('Ingresa un numero "De Preferencia: no mas de 7 Digitos"'));
-    let arrayFactores = [];
+    let num = parseInt(prompt('Ingresa un numero "De Preferencia: no mas de 7 Digitos"'));
     
-    if (numFac0 === 0){
+    if (num === 0){
         alert('¡¿Como va a tener Factores el Cero?!, menos 0.000 Puntos');
-    } else if (isNaN(numFac0)) {
+    } else if (isNaN(num)) {
         alert('!!NO LETRAS, SOLO NUMEROS, NUMEROS¡¡');
-    } else
-
-    for (let i = 1; i <= numFac0; i++){
-
-        let buscando = numFac0 % i;
-
-        if (buscando === 0){
-            arrayFactores.push(i);
-        }
+    } else{
+        
+        let resultados = new ClassCalculos(num);
+        alert('Los Factores de '+num+' son '+resultados.factores())
     }
-    alert('Los Factores de '+numFac0+' son '+arrayFactores.join(' - '))
 }
+// Me falta el Array con un fitro... se me ocurre un sistema de notas
+// Que que me diga la nota mas alta, la mas baja y un promedio
