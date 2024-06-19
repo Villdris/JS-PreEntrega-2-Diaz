@@ -122,3 +122,222 @@ function funcionFactores(){
 }
 // Me falta el Array con un fitro... se me ocurre un sistema de notas
 // Que que me diga la nota mas alta, la mas baja y un promedio
+
+let PuntosNota = {
+    suma:0,
+    resta:0,
+    multiplicar:0,
+    dividir:0
+};
+
+let intentos = {
+    suma:3,
+    resta:3,
+    multiplicar:3,
+    dividir:3
+}
+
+let registros = [];
+
+function ejerciciosSuma() {
+        
+    if(intentos.suma <= 3 && intentos.suma > 0){
+        alert(`Es tu Turno de Sumar :D`);
+
+        let num = Math.floor(Math.random() * 10) + 1;
+        let num1 = Math.floor(Math.random() * 10) + 1;
+        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num}+${num1} =`))
+
+        if(num+num1 === respuestaAlumno){
+            
+            PuntosNota.suma+=10;
+            intentos.suma--
+
+            alert(`Genial, has acertado: +10 puntos
+                Intentos: ${intentos.suma}
+                Puntos: ${PuntosNota.suma}`);
+
+            registrar('suma', num, num1, respuestaAlumno, true)
+            
+            ejerciciosSuma();
+        } 
+        else if(num+num1!==respuestaAlumno){
+            intentos.suma--
+            alert(`Oh! esa no era
+                Intentos: ${intentos.suma}
+                Puntos: ${PuntosNota.suma}`);
+
+            registrar('suma', num, num1, respuestaAlumno, false)
+            
+            ejerciciosSuma()
+        }
+    }
+    else{
+        return alert(`Usaste tus 3 intentos para sumar`);
+    } 
+}
+// mientras hago esto, no tiene sentido un sistema de notas con un filtro o buscador
+//se me ocurre un array que registre los datos de cada operacion
+// y mostrar todos los ejercicios y filtrarlos por tipoDeOperacion o mostras las correctas e incorrectas.
+function ejerciciosResta() {
+        
+    if(intentos.resta <= 3 && intentos.resta > 0){
+        alert(`Ahora a Restar`);
+
+        let num = Math.floor(Math.random() * 10) + 1;
+        let num1 = Math.floor(Math.random() * 5) + 1;
+        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num}-${num1} =`))
+
+        if(num-num1 === respuestaAlumno){
+            
+            PuntosNota.resta+=10;
+            intentos.resta--
+
+            alert(`Que Bien, Es Correcto: +10 puntos
+                Intentos: ${intentos.resta}
+                Puntos: ${PuntosNota.resta}`);
+
+            registrar('resta', num, num1, respuestaAlumno, true);
+            
+            ejerciciosResta()
+        } 
+        else if(num-num1!==respuestaAlumno){
+            intentos.resta--
+            alert(`Intentemos De Nuevo
+                Intentos: ${intentos.resta}
+                Puntos: ${PuntosNota.resta}`)
+
+                registrar('resta', num, num1, respuestaAlumno, false)
+        }
+    }
+    else{
+        return alert(`Usaste tus 3 intentos para Restar`);
+    } 
+}
+
+function ejerciciosMultiplicar() {
+        
+    if(intentos.multiplicar <= 3 && intentos.multiplicar > 0){
+        alert(`Vas a Multiplicar :D`);
+
+        let num = Math.floor(Math.random() * 10) + 1;
+        let num1 = Math.floor(Math.random() * 10) + 1;
+        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num} X ${num1} =`))
+
+        if(num*num1 === respuestaAlumno){
+            
+            PuntosNota.multiplicar+=10;
+            intentos.multiplicar--
+
+            alert(`Maravilloso, es correcta: +10 puntos
+                Intentos: ${intentos.resta}
+                Puntos: ${PuntosNota.resta}`);
+
+                registrar('multiplicar', num, num1, respuestaAlumno, true);
+        } 
+        else if(num*num1!==respuestaAlumno){
+            intentos.multiplicar--
+            alert(`Intentemos De Nuevo
+                Intentos: ${intentos.multiplicar}
+                Puntos: ${PuntosNota.multiplicar}`)
+
+                registrar('multiplicar', num, num1, respuestaAlumno, false)
+        }
+    }
+    else{
+        return alert(`Usaste tus 3 intentos para Multiplicar`);
+    } 
+}
+
+function ejerciciosDividir() {
+        
+    if(intentos.dividir <= 3 && intentos.dividir > 0){
+        alert(`A partir, a Dividir`);
+
+        let num = Math.floor(Math.random() * 10) + 1;
+        let num1 = Math.floor(Math.random() * 4) + 1;
+        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num} / ${num1} =`))
+        
+        if(Math.trunc(num/num1) === respuestaAlumno){   //algunos resultados daban decimales 
+                                                        // y eso es imposible Math.trunch otravez
+            PuntosNota.dividir+=10;
+            intentos.dividir--
+
+            alert(`Bravoo, es correcta: +10 puntos
+                Intentos: ${intentos.dividir}
+                Puntos: ${PuntosNota.dividir}`);
+
+                registrar('dividir', num, num1, respuestaAlumno, true)
+        } 
+        else if(num*num1!==respuestaAlumno){
+            intentos.dividir--
+            alert(`Intentemos De Nuevo
+                Intentos: ${intentos.dividir}
+                Puntos: ${PuntosNota.dividir}`)
+
+            registrar('dividir', num, num1, respuestaAlumno, false)
+        }
+    }
+    else{
+        return alert(`Se acabaron tus intentos`);
+    } 
+}
+// Aun me falta el array con find o filter, haber que sale :P
+// na na, dificil, volvere a ver la clase donde explica eso xD
+
+// ok ok, mas claro, un poco, creare el array "registros, y .pusheare los datos"
+
+// let registros = [];
+
+function registrar(tipo, num, num1, respuesta, bienOMal){
+    
+    registros.push({
+        tipo: tipo,
+        num: num,
+        num1: num1,
+        respuesta: respuesta,
+        bienOMal: bienOMal, //true == bien -- false == mal
+    })
+}
+function filterCorrectas(objRegistro){      // otra media hora perdida xc
+    return objRegistro.bienOMal === true;   // en lugar de poner "objRegistro.bienOMal" en return
+                                            // puse "registro.bienOMal", llamando directamante a la variable
+}                                           // y no sabia que pasaba, si en mi mente el codigo corria bien ja ja      
+
+let respuestasCorrectas = registros.filter(filterCorrectas);
+
+function correctasbotton(){
+
+    //respuestasCorrectas = registros.filter(filterCorrectas);
+    
+    console.log(`Tienes ${respuestasCorrectas.length} respuestas Correctas`); //ERROR ERROR esto no hace lo que tiene que hacer
+    alert(`Tienes ${respuestasCorrectas.length} respuestas Correctas`);       //ERROR ERROR esto no hace lo que tiene que hacer
+
+    console.log(`Tienes ${registros.filter(filterCorrectas).length} respuestas Correctas`)
+    alert(`Tienes ${registros.filter(filterCorrectas).length} respuestas Correctas`)
+
+    // me corrompí y le pregunte a chatGTP y es una bobada
+    // la variable let "respuestasCorrectas" debe estar dentro de la funcion para que se actualize
+    // eso me dijo chatGPT, pero no entiendo, porque dan resultados diferentes
+    // si ambos console.log() y ambas alert() estan dentro del mismo boton/funcion
+    //le dejo la solucion comentada, para que vea :D
+    console.log(respuestasCorrectas)
+}
+
+//otro filter pero de respuestasIncorrectas, (llevo en mi corazón lecciones de errores del primer filter T.T)
+
+function filterIncorrectas(objRegistros){
+    return objRegistros.bienOMal === false;
+}
+
+let respuestasIncorrectas = registros.filter(filterIncorrectas);
+
+function incorrectasBotton(){
+
+    respuestasIncorrectas = registros.filter(filterIncorrectas);
+
+    console.log(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`)
+    alert(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`)
+
+    console.log(respuestasIncorrectas);
+}
