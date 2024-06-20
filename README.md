@@ -15,4 +15,4 @@ METODOS DE BUSQUEDA: tiene 3 .filter() y un forEach, pensé en agregar un .find(
 
 El primer .filter() tiene un error,sé como arreglarlo pero no lo e quitado para que vea esa anomalia. No me quite puntos por eso :c
 
-----GithubPages: https://villdris.github.io/JS-PreEntrega-2-Diaz/----
+---- GithubPages: https://villdris.github.io/JS-PreEntrega-2-Diaz/ ----
