@@ -208,6 +208,8 @@ function ejerciciosResta() {
                 Puntos: ${PuntosNota.resta}`)
 
                 registrar('resta', num, num1, respuestaAlumno, false)
+
+            ejerciciosResta()
         }
     }
     else{
@@ -234,6 +236,8 @@ function ejerciciosMultiplicar() {
                 Puntos: ${PuntosNota.resta}`);
 
                 registrar('multiplicar', num, num1, respuestaAlumno, true);
+
+                ejerciciosMultiplicar()
         } 
         else if(num*num1!==respuestaAlumno){
             intentos.multiplicar--
@@ -242,6 +246,8 @@ function ejerciciosMultiplicar() {
                 Puntos: ${PuntosNota.multiplicar}`)
 
                 registrar('multiplicar', num, num1, respuestaAlumno, false)
+
+                ejerciciosMultiplicar()
         }
     }
     else{
@@ -268,6 +274,8 @@ function ejerciciosDividir() {
                 Puntos: ${PuntosNota.dividir}`);
 
                 registrar('dividir', num, num1, respuestaAlumno, true)
+
+                ejerciciosDividir()
         } 
         else if(num*num1!==respuestaAlumno){
             intentos.dividir--
@@ -276,6 +284,8 @@ function ejerciciosDividir() {
                 Puntos: ${PuntosNota.dividir}`)
 
             registrar('dividir', num, num1, respuestaAlumno, false)
+
+            ejerciciosDividir()
         }
     }
     else{
@@ -306,7 +316,7 @@ function filterCorrectas(objRegistro){      // otra media hora perdida xc
 
 let respuestasCorrectas = registros.filter(filterCorrectas);
 
-function correctasbotton(){
+function correctasBotton(){
 
     //respuestasCorrectas = registros.filter(filterCorrectas);
     
@@ -330,14 +340,36 @@ function filterIncorrectas(objRegistros){
     return objRegistros.bienOMal === false;
 }
 
-let respuestasIncorrectas = registros.filter(filterIncorrectas);
-
 function incorrectasBotton(){
 
-    respuestasIncorrectas = registros.filter(filterIncorrectas);
+    let respuestasIncorrectas = registros.filter(filterIncorrectas);
 
     console.log(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`)
     alert(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`)
 
     console.log(respuestasIncorrectas);
 }
+
+
+//Otro filtro ...este no me costó tanto, y eso que esta mas trabajado
+// 3 horas haciendo este filtroPorTipo
+function filterPorTipo(tipo){
+    return function (objRegistros){
+            return objRegistros.tipo === tipo;
+    }
+}
+
+function tipoDeOperacionBotton(tipo=prompt('Escribe "suma, resta, multiplicar, dividir" para filtrar por tipo')){
+    
+    let respuestasPorTipo = registros.filter(filterPorTipo(tipo));
+    
+    respuestasPorTipo.forEach((respuestasPorTipo)=>
+        alert(`Operacion: ${respuestasPorTipo.tipo}
+        numero ${respuestasPorTipo.num}
+        numero ${respuestasPorTipo.num1}
+        Respuesta del Usuario: ${respuestasPorTipo.respuesta}
+        ¿Fue correcta?: ${respuestasPorTipo.bienOMal}`))
+}
+
+// Los comentarios serán borrados en la terceraEntrega
+// y habrán nuevos comentarios en al terceraEntrega :D
