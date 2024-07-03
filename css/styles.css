@@ -45,6 +45,42 @@ header p{
     -ms-border-radius: 40px;
     -o-border-radius: 40px;
 }
+nav{
+    display: flex;
+    justify-content: center;
+}
+nav ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+    width: 700px;
+    background-color: #146bc8;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    border-right: 3px solid black;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+}
+
+nav ul li{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav ul li img{
+    width: 60px;
+}
+nav ul li a{
+    text-decoration: none;
+    font-size: 1rem;
+    color: #5e1212;
+    font-weight: 700;
+}
 
 main {
     background-color: #146bc82d;
@@ -59,6 +95,25 @@ main {
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
     border: 3px solid #2b003f;
+}
+main h2{
+    font-size: 4rem;
+    text-align: center;
+}
+main p{
+    text-align: center;
+    font-size: 2rem;
+}
+main img{
+    width: 300px;
+}
+.div_explicacion{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.div_explicacion_p{
+    font-size: 2rem;
 }
 
 section {

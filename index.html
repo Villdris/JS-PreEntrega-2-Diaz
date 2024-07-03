@@ -12,11 +12,17 @@
 <body>
     <header>
         <h1>Primer Proyecto en JavaScript</h1>
-        <p>Mismo repositorio, pero es la 2da entrega</p>
+        <p>Matematicas Para Niños</p>
     </header>
-
     <main>
-        <h2>Calculos Basicos</h2>
+        <div class="form_registarUsuario" id="mensaje">
+            
+            <label for="nombreUsuario">Tu Nombre</label>
+            <input type="text" name="" id="nombreUsuario" placeholder="Michiberto">
+            
+            <button onclick="registrarUsuario()">Soy nuevo</button>
+        </div>
+        <div></div>
         <section>
             <button class="slide_right" onclick="funcionSumar()">+ Sumar +</button>
             <button class="slide_right" onclick="funcionRestar()">- Restar -</button>
@@ -34,16 +40,39 @@
         <h2>
             Tus estadisticas</h2>
         <section>
-            <div>
-                <button class="slide_right buttonAzul" onclick="correctasBotton()">Tus Aciertos :D</button>
-                <p>este filtro tiene un error, no lo e quitado <br>
-                    código JS comentado :D
-                </p>
-            </div>
+            <button class="slide_right buttonAzul" onclick="correctasBotton()">Tus Aciertos :D</button>
             <button class="slide_right buttonAzul" onclick="incorrectasBotton()">Tus Errores</button>
             <button class="slide_right buttonAzul" onclick="tipoDeOperacionBotton()">Tus Operaciones</button>
         </section>
     </main>
+    <nav>
+        <ul>
+            <li>
+                <a href="pages/sumas.html" target="_blank">
+                    <img src="assets/suma.png" alt="simbolo de adicion o suma">
+                </a>
+                <a href="pages/sumas.html" target="_blank">SUMAS</a>
+            </li>
+            <li>
+                <a href="pages/restas.html" target="_blank">
+                    <img src="assets/resta.png" alt="simbolo de resta">
+                </a>
+                <a href="pages/restas.html" target="_blank">RESTAS</a>
+            </li>
+            <li>
+                <a href="pages/multiplicacion.html" target="_blank">
+                    <img src="assets/Multiplicar.png" alt="simbolo X de multiplicar">
+                </a>
+                <a href="pages/multiplicacion.html" target="_blank">MULTIPLICACIOM</a>
+            </li>
+            <li>
+                <a href="pages/division.html" target="_blank">
+                    <img src="assets/dividir.png" alt="simbolo de division">
+                </a>
+                <a href="pages/division.html" target="_blank">DIVISION</a>
+            </li>
+        </ul>
+    </nav>
     <script src="./js/calculos.js"></script>
 </body>
 </html>
