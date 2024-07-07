@@ -5,7 +5,6 @@
 }
 
 body {
-    height: 1000px;
     background-image: linear-gradient(to right bottom, #146bc8, #a15cc0, #e64895, #ff5958, #ee870a);
     font-family: "Biryani", sans-serif;
     height: auto;
@@ -45,6 +44,23 @@ header p{
     -ms-border-radius: 40px;
     -o-border-radius: 40px;
 }
+
+@media (max-width: 1036px){
+    h1{
+        font-size: 3rem;
+        align-self: center;
+    }
+}
+@media (max-width: 504px){
+    h1{
+        font-size: 2.5rem;
+    }
+    header p{
+        font-size: 1.5rem;
+    }
+}
+
+
 nav{
     display: flex;
     justify-content: center;
@@ -87,8 +103,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    padding: 30px;
-    margin: 20px;
+    padding: 10px;
+    margin: 10px;
     border-radius: 20px;
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -153,4 +169,101 @@ main section button{
 }
 .buttonAzul:hover{
     box-shadow: inset 400px 0 0 0 #3002d8a3;
+}
+
+.sumas{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #146bc83b;
+    border: 3px solid rgb(84, 1, 1);
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+
+.sumas_caja, .resta_caja, .multiplicacion_caja, .division_caja{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(255, 0, 0, 0.300);
+    border: 2px solid rgb(111, 7, 81);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.resta_caja{
+    background-color: rgba(255, 255, 0, 0.300);
+}
+.multiplicacion_caja{
+    background-color: #2602d878;
+}
+.division_caja{
+    background-color: rgba(170, 3, 176, 0.543);
+}
+
+
+.respuesta{
+    width: 80px;
+    height: 60px;
+    font-size: 3.5rem;
+    background-color: #a923236f;
+    border: 2px solid rgb(111, 7, 81);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.sumas_caja_numero, .sumas_caja_numeroDos, .resta_caja_numero, .resta_caja_numeroDos,
+.multiplicacion_caja_numero, .multiplicacion_caja_numeroDos,
+.division_caja_numero, .division_caja_numeroDos{
+    font-size: 3.4rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.sumas_info, .resta_info, .multiplicacion_info, .division_info{
+    position: sticky;
+    align-self: flex-start;
+    background-color: rgba(0, 255, 255, 0.300);
+    width: 230px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    bottom: 500px;
+}
+.resta_info{
+    background-color: rgba(0, 0, 255, 0.300);
+}
+@media (max-width: 756px){
+    .sumas_info, .resta_info, .multiplicacion_info, .division_info{
+        position: static;
+    }
+}
+
+
+
+
+.correcto{
+    background-color: rgba(0, 128, 0, 0.492);
+}
+.incorrecto{
+    background-color: rgba(255, 0, 0, 0.536);
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    height: 200px;
+    background-color: rgba(25, 25, 112, 0.343);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 }

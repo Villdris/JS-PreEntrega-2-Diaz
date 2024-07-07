@@ -140,7 +140,7 @@ class ClassUsuario {
     }
 
 
-    agregarRegisto(tipo, num, num1, respuesta, correcta){
+    agregarRegistro(tipo, num, num1, respuesta, correcta){
         this.registros.push({
             tipo: tipo,
             num: num,
@@ -148,6 +148,7 @@ class ClassUsuario {
             respuesta: respuesta,
             correcta: correcta,
         })
+        setData();
     }
 
     saludarAlUsuario(){
@@ -165,50 +166,198 @@ class ClassUsuario {
 
 }
 
+
+
+//Quize hacer el Dom primero, pero se me complico un monton hacer que el registro funcione
+//Asi que me dedique a hacer el Storage que fue mas facil, tuve problemas con la carga de usuarios
+//Ahora ya no c:
+
 let usuario;
-let todosLosUsuarios = [];
+let todosLosUsuarios = cargarUsuariosDesdeLocalStorage();
 
-function registrarUsuario() {
-    let inputDom = document.getElementById("nombreUsuario").value;
+function setData() {
+    localStorage.setItem('usuarios', JSON.stringify(todosLosUsuarios));
+}
 
-    let usuarioEncontrado = todosLosUsuarios.find(user => user.nombreUsuario === inputDom);
+function cargarUsuariosDesdeLocalStorage() {
+    let usuarios = localStorage.getItem('usuarios');
 
-    let msj = document.getElementById('mensaje');
-    msj.innerHTML = ''; // Limpiar mensajes anteriores
-
-    if (usuarioEncontrado) {
+    if (usuarios) {
         
-        usuario = usuarioEncontrado;
-        let bienvenidoDom = document.createElement('p');
-        bienvenidoDom.innerText = `Bienvenido de nuevo, ${usuario.nombreUsuario}`;
-        msj.append(bienvenidoDom);
-        usuario.saludarAlUsuario();
+        let usuariosParseados = JSON.parse(usuarios).map(user => {
+            let usuario = new ClassUsuario(user.nombreUsuario);
+            usuario.puntos = user.puntos;
+            usuario.intentos = user.intentos;
+            usuario.registros = user.registros;
+            return usuario;
+        });
+        return usuariosParseados;
     } else {
-        usuario = new ClassUsuario(inputDom);
-        
-        let bienvenidoDom = document.createElement('p');
-        
-        bienvenidoDom.innerText = `Hola ${usuario.nombreUsuario}, te has registrado correctamente`;
-        
-        msj.append(bienvenidoDom);
-        
-        todosLosUsuarios.push(usuario);
-        
-        usuario.saludarAlUsuario();
-        
-        console.log(todosLosUsuarios);
+        return [];
     }
 }
 
+function registrarUsuario() {
+    let inputNombre = document.getElementById("nombreUsuario").value;
+    
+    let usuarioEncontrado = todosLosUsuarios.find(usuario => usuario.nombreUsuario === inputNombre);
+    
+    let msj = document.getElementById('mensaje');
+    msj.innerHTML = '';
+
+    if (usuarioEncontrado) {
+        usuario = usuarioEncontrado;
+        usuario.saludarAlUsuario();
+        
+        msj.innerHTML = `Bienvenido de nuevo, ${usuario.nombreUsuario}`;
+    } else {
+        usuario = new ClassUsuario(inputNombre);
+        
+        todosLosUsuarios.push(usuario);
+        usuario.saludarAlUsuario();
+        
+        msj.innerHTML = `Hola ${usuario.nombreUsuario}, te has registrado correctamente`;
+        setData();
+    }
+}
+
+//Terminado el Storage ;D 
+// ahora el Dom *calavera*
+function crearNumerosAleatorios() {
+    
+    let domSumasCajas = document.getElementsByClassName('sumas_caja');
+    
+    for (let i = 0; i < domSumasCajas.length; i++) {
+        let domNumUno = domSumasCajas[i].getElementsByClassName('sumas_caja_numero')[0];
+        let domNumDos = domSumasCajas[i].getElementsByClassName('sumas_caja_numeroDos')[0];
+        
+        let inputDomRespuesta = domSumasCajas[i].getElementsByClassName('respuesta')[0];
+        
+        domNumUno.innerText = Math.floor(Math.random() * 10) + 1;
+        domNumDos.innerText = Math.floor(Math.random() * 10) + 1;
+        
+        inputDomRespuesta.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'suma');
+            }
+        });
+    }
+
+    //ahora entiendo por que inventarios React :ccccc X.X
+
+    let domRestasCajas = document.getElementsByClassName('resta_caja');
+    
+    for (let i = 0; i < domRestasCajas.length; i++) {
+        let domNumUno = domRestasCajas[i].getElementsByClassName('resta_caja_numero')[0];
+        let domNumDos = domRestasCajas[i].getElementsByClassName('resta_caja_numeroDos')[0];
+        
+        let inputDomRespuesta = domRestasCajas[i].getElementsByClassName('respuesta')[0];
+        
+        domNumUno.innerText = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+        domNumDos.innerText = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+        
+        inputDomRespuesta.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'resta');
+            }
+        });
+    }
+
+
+    let domMultiplicacionesCajas = document.getElementsByClassName('multiplicacion_caja');
+    
+    for (let i = 0; i < domMultiplicacionesCajas.length; i++) {
+        let domNumUno = domMultiplicacionesCajas[i].getElementsByClassName('multiplicacion_caja_numero')[0];
+        let domNumDos = domMultiplicacionesCajas[i].getElementsByClassName('multiplicacion_caja_numeroDos')[0];
+        
+        let inputDomRespuesta = domMultiplicacionesCajas[i].getElementsByClassName('respuesta')[0];
+        
+        domNumUno.innerText = Math.floor(Math.random() *(5 - 1 + 1)) + 1;
+        domNumDos.innerText = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+        
+        inputDomRespuesta.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'multiplicacion');
+            }
+        });
+    }
+
+
+    let domDivisionesCajas = document.getElementsByClassName('division_caja');
+    
+    for (let i = 0; i < domDivisionesCajas.length; i++) {
+        let domNumUno = domDivisionesCajas[i].getElementsByClassName('division_caja_numero')[0];
+        let domNumDos = domDivisionesCajas[i].getElementsByClassName('division_caja_numeroDos')[0];
+        
+        let inputDomRespuesta = domDivisionesCajas[i].getElementsByClassName('respuesta')[0];
+        
+        domNumUno.innerText = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
+        domNumDos.innerText = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
+        
+        inputDomRespuesta.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'division');
+            }
+        });
+    }
+}
+crearNumerosAleatorios()
 
 
 
+function comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, tipo) {
+    let num = parseInt(domNumUno.innerText);
+    let num1 = parseInt(domNumDos.innerText);
+    
+    let respuestaAlumno = parseInt(inputDomRespuesta.value);
+    let correcta = false;
+    
+    switch (tipo) {
+        case 'suma':
+            correcta = (num + num1 === respuestaAlumno);
+            break;
+        case 'resta':
+            correcta = (num - num1 === respuestaAlumno);
+            break;
+        case 'multiplicacion':
+            correcta = (num * num1 === respuestaAlumno);
+            break;
+        case 'division':
+            correcta = (Math.trunc(num / num1) === respuestaAlumno);
+            break;
+    }
 
+    if (correcta) {
+        usuario.puntos[tipo] += 10;
+        usuario.intentos[tipo]--;
+        inputDomRespuesta.disabled = true;
+        inputDomRespuesta.classList.add('correcto');
+    } else {
+        usuario.intentos[tipo]--;
+        inputDomRespuesta.classList.add('incorrecto');
+    }
+    usuario.agregarRegistro(tipo, num, num1, respuestaAlumno, correcta);
+    actualizarDatosUsuario(tipo);
 
+    if (usuario.intentos[tipo] === 0) {
+        bloquearEjercicios(tipo);
+    }
+}
 
+function actualizarDatosUsuario(tipo) {
+    let intentosDom = document.getElementById(`intentos_${tipo}`);
+    let puntosDom = document.getElementById(`puntos_${tipo}`);
+    
+    intentosDom.innerText = `Intentos: ${usuario.intentos[tipo]}`;
+    puntosDom.innerText = `Puntos: ${usuario.puntos[tipo]}`;
+}
 
-
-
+function bloquearEjercicios(tipo) {
+    let inputs = document.getElementsByClassName(`${tipo}_caja`).getElementsByClassName('respuesta');
+    for (let input of inputs) {
+        input.disabled = true;
+    }
+}
 
 
 
@@ -230,7 +379,7 @@ function ejerciciosSuma() {
                 Intentos: ${usuario.intentos.suma}
                 Puntos: ${usuario.puntos.suma}`);
 
-                usuario.agregarRegisto('suma', num, num1, respuestaAlumno, true);
+                usuario.agregarRegistro('suma', num, num1, respuestaAlumno, true);
 
             ejerciciosSuma();
         } 
@@ -241,7 +390,7 @@ function ejerciciosSuma() {
                 Intentos: ${usuario.intentos.suma}
                 Puntos: ${usuario.puntos.suma}`);
 
-            usuario.agregarRegisto('suma', num, num1, respuestaAlumno, false);
+            usuario.agregarRegistro('suma', num, num1, respuestaAlumno, false);
 
             ejerciciosSuma()
         }
@@ -269,7 +418,7 @@ function ejerciciosResta() {
                 Intentos: ${usuario.intentos.resta}
                 Puntos: ${usuario.puntos.resta}`);
 
-            usuario.agregarRegisto('resta', num, num1, respuestaAlumno, true);
+            usuario.agregarRegistro('resta', num, num1, respuestaAlumno, true);
 
             ejerciciosResta()
         } 
@@ -280,7 +429,7 @@ function ejerciciosResta() {
                 Intentos: ${usuario.intentos.resta}
                 Puntos: ${usuario.puntos.resta}`)
 
-                usuario.agregarRegisto('resta', num, num1, respuestaAlumno, false)
+                usuario.agregarRegistro('resta', num, num1, respuestaAlumno, false)
 
             ejerciciosResta()
         }
@@ -308,7 +457,7 @@ function ejerciciosMultiplicar() {
                 Intentos: ${usuario.intentos.multiplicacion}
                 Puntos: ${usuario.puntos.multiplicacion}`);
 
-                usuario.agregarRegisto('multiplicar', num, num1, respuestaAlumno, true);
+                usuario.agregarRegistro('multiplicar', num, num1, respuestaAlumno, true);
 
                 ejerciciosMultiplicar()
         } 
@@ -319,7 +468,7 @@ function ejerciciosMultiplicar() {
                 Intentos: ${usuario.intentos.multiplicacion}
                 Puntos: ${usuario.puntos.multiplicacion}`)
 
-                usuario.agregarRegisto('multiplicar', num, num1, respuestaAlumno, false)
+                usuario.agregarRegistro('multiplicar', num, num1, respuestaAlumno, false)
 
                 ejerciciosMultiplicar()
         }
@@ -347,7 +496,7 @@ function ejerciciosDividir() {
                 Intentos: ${usuario.intentos.division}
                 Puntos: ${usuario.puntos.division}`);
 
-                usuario.agregarRegisto('dividir', num, num1, respuestaAlumno, true)
+                usuario.agregarRegistro('dividir', num, num1, respuestaAlumno, true)
 
                 ejerciciosDividir()
         } 
@@ -358,7 +507,7 @@ function ejerciciosDividir() {
                 Intentos: ${usuario.intentos.division}
                 Puntos: ${usuario.puntos.division}`)
 
-            usuario.agregarRegisto('dividir', num, num1, respuestaAlumno, false)
+            usuario.agregarRegistro('dividir', num, num1, respuestaAlumno, false)
 
             ejerciciosDividir()
         }
