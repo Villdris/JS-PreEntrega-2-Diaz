@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matematicas Para Niños</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@200;300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Margarine&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Biryani:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
@@ -17,268 +19,253 @@
         <h1>Primer Proyecto en JavaScript</h1>
         <p>Matematicas Para Niños</p>
     </header>
-    <main>
-        <div class="form_registarUsuario" id="mensaje">
 
-            <label for="nombreUsuario">Tu Nombre</label>
+    <main>
+        <div id="registrarUsuario">
+
+            <label for="nombreUsuario">¿Quien va a jugar?</label>
             <input type="text" name="" id="nombreUsuario" placeholder="Michiberto">
 
-            <button onclick="registrarUsuario()">Soy nuevo</button>
+            <button onclick="registrarUsuario()">Entrar</button>
+            <div id="mensaje"></div>
         </div>
-        <div id="mensaje"></div>
 
-        <section>
-            <button class="slide_right" onclick="funcionSumar()">+ Sumar +</button>
-            <button class="slide_right" onclick="funcionRestar()">- Restar -</button>
-            <button class="slide_right" onclick="funcionMultiplicar()">X* Multiplicar *X</button>
-            <button class="slide_right" onclick="funcionDividir()">/: Dividir :/</button>
-            <button class="slide_right" onclick="funcionFactores()">X* Factores :/</button>
+
+
+        <section class="ocultar" id="ejercicios">
+
+            <article class="sumas">
+                <h2>Tu turno de Sumar</h2>
+                <div class="sumas_caja">
+                    <div class="sumas_caja_numero"></div>
+                    <p> + </p>
+                    <div class="sumas_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="sumas_caja">
+                    <div class="sumas_caja_numero"></div>
+                    <p> + </p>
+                    <div class="sumas_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="sumas_caja">
+                    <div class="sumas_caja_numero"></div>
+                    <p> + </p>
+                    <div class="sumas_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="sumas_caja">
+                    <div class="sumas_caja_numero"></div>
+                    <p> + </p>
+                    <div class="sumas_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="sumas_caja">
+                    <div class="sumas_caja_numero"></div>
+                    <p> + </p>
+                    <div class="sumas_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+                <div class="sumas_info">
+                    <p id="intentos_suma">intentos</p>
+                    <p id="puntos_suma">puntos</p>
+                </div>
+            </article>
+
+            <article class="sumas">
+                <h2>Vamos a Restar</h2>
+                <div class="resta_caja">
+                    <div class="resta_caja_numero"></div>
+                    <p> - </p>
+                    <div class="resta_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="resta_caja">
+                    <div class="resta_caja_numero"></div>
+                    <p> - </p>
+                    <div class="resta_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="resta_caja">
+                    <div class="resta_caja_numero"></div>
+                    <p> - </p>
+                    <div class="resta_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="resta_caja">
+                    <div class="resta_caja_numero"></div>
+                    <p> - </p>
+                    <div class="resta_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="resta_caja">
+                    <div class="resta_caja_numero"></div>
+                    <p> - </p>
+                    <div class="resta_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="resta_info">
+                    <p id="intentos_resta">intentos</p>
+                    <p id="puntos_resta">puntos</p>
+                </div>
+            </article>
+
+            <article class="sumas">
+                <h2>Te toca Multiplicar</h2>
+                <div class="multiplicacion_caja">
+                    <div class="multiplicacion_caja_numero"></div>
+                    <p> x </p>
+                    <div class="multiplicacion_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="multiplicacion_caja">
+                    <div class="multiplicacion_caja_numero"></div>
+                    <p> x </p>
+                    <div class="multiplicacion_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="multiplicacion_caja">
+                    <div class="multiplicacion_caja_numero"></div>
+                    <p> x </p>
+                    <div class="multiplicacion_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="multiplicacion_caja">
+                    <div class="multiplicacion_caja_numero"></div>
+                    <p> x </p>
+                    <div class="multiplicacion_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="multiplicacion_caja">
+                    <div class="multiplicacion_caja_numero"></div>
+                    <p> x </p>
+                    <div class="multiplicacion_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="multiplicacion_info">
+                    <p id="intentos_multiplicacion">intentos</p>
+                    <p id="puntos_multiplicacion">puntos</p>
+                </div>
+
+            </article>
+
+            <article class="sumas">
+                <h2>Divide y venceras</h2>
+
+                <div class="division_caja">
+                    <div class="division_caja_numero"></div>
+                    <p> / </p>
+                    <div class="division_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="division_caja">
+                    <div class="division_caja_numero"></div>
+                    <p> / </p>
+                    <div class="division_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="division_caja">
+                    <div class="division_caja_numero"></div>
+                    <p> / </p>
+                    <div class="division_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="division_caja">
+                    <div class="division_caja_numero"></div>
+                    <p> / </p>
+                    <div class="division_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="division_caja">
+                    <div class="division_caja_numero"></div>
+                    <p> / </p>
+                    <div class="division_caja_numeroDos"></div>
+                    <p> = </p>
+                    <input type="text" class="respuesta">
+                </div>
+
+                <div class="division_info">
+                    <p id="intentos_division">intentos</p>
+                    <p id="puntos_division">puntos</p>
+                </div>
+
+            </article>
         </section>
-        <h2>Ejercicios</h2>
-        <section>
-            <button class="slide_right" onclick="ejerciciosSuma()">Tu Turno de Sumar</button>
-            <button class="slide_right" onclick="ejerciciosResta()">Vamos Restar</button>
-            <button class="slide_right" onclick="ejerciciosMultiplicar()">Te Toca Multiplicar</button>
-            <button class="slide_right" onclick="ejerciciosDividir()">Divide y vencerás</button>
+        <section id="puntaje_total">
+            <button onclick="reset()">Reset</button>
         </section>
-        <h2>Tus estadisticas</h2>
-        <section>
-            <button class="slide_right buttonAzul" onclick="correctasBotton()">Tus Aciertos :D</button>
-            <button class="slide_right buttonAzul" onclick="incorrectasBotton()">Tus Errores</button>
-            <button class="slide_right buttonAzul" onclick="tipoDeOperacionBotton()">Tus Operaciones</button>
-        </section>
-
-        <h2>Sumas Dom </h2>
-        <section class="sumas">
-            <div class="sumas_caja">
-                <div class="sumas_caja_numero"></div>
-                <p> + </p>
-                <div class="sumas_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="sumas_caja">
-                <div class="sumas_caja_numero"></div>
-                <p> + </p>
-                <div class="sumas_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="sumas_caja">
-                <div class="sumas_caja_numero"></div>
-                <p> + </p>
-                <div class="sumas_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="sumas_caja">
-                <div class="sumas_caja_numero"></div>
-                <p> + </p>
-                <div class="sumas_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="sumas_caja">
-                <div class="sumas_caja_numero"></div>
-                <p> + </p>
-                <div class="sumas_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-            <div class="sumas_info">
-                <p id="intentos_suma">intentos</p>
-                <p id="puntos_suma">puntos</p>
-            </div>
-        </section>
-
-        <h2>Restas</h2>
-        <section class="sumas">
-
-            <div class="resta_caja">
-                <div class="resta_caja_numero"></div>
-                <p> - </p>
-                <div class="resta_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="resta_caja">
-                <div class="resta_caja_numero"></div>
-                <p> - </p>
-                <div class="resta_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="resta_caja">
-                <div class="resta_caja_numero"></div>
-                <p> - </p>
-                <div class="resta_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="resta_caja">
-                <div class="resta_caja_numero"></div>
-                <p> - </p>
-                <div class="resta_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="resta_caja">
-                <div class="resta_caja_numero"></div>
-                <p> - </p>
-                <div class="resta_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="resta_info">
-                <p id="intentos_resta">intentos</p>
-                <p id="puntos_resta">puntos</p>
-            </div>
-        </section>
-
-        <h2>Multiplicacion</h2>
-        <section class="sumas">
-            <div class="multiplicacion_caja">
-                <div class="multiplicacion_caja_numero"></div>
-                <p> x </p>
-                <div class="multiplicacion_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="multiplicacion_caja">
-                <div class="multiplicacion_caja_numero"></div>
-                <p> x </p>
-                <div class="multiplicacion_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="multiplicacion_caja">
-                <div class="multiplicacion_caja_numero"></div>
-                <p> x </p>
-                <div class="multiplicacion_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="multiplicacion_caja">
-                <div class="multiplicacion_caja_numero"></div>
-                <p> x </p>
-                <div class="multiplicacion_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="multiplicacion_caja">
-                <div class="multiplicacion_caja_numero"></div>
-                <p> x </p>
-                <div class="multiplicacion_caja_numeroDos"></div>
-                <p> = </p>
-                <input type="text" class="respuesta">
-            </div>
-
-            <div class="multiplicacion_info">
-                <p id="intentos_multiplicacion">intentos</p>
-                <p id="puntos_multiplicacion">puntos</p>
-            </div>
-
-        </section>
-
-        <h2>Division</h2>
-        <section class="sumas">
-        
-        <div class="division_caja">
-            <div class="division_caja_numero"></div>
-            <p> / </p>
-            <div class="division_caja_numeroDos"></div>
-            <p> = </p>
-            <input type="text" class="respuesta">
-        </div>
-
-        <div class="division_caja">
-            <div class="division_caja_numero"></div>
-            <p> / </p>
-            <div class="division_caja_numeroDos"></div>
-            <p> = </p>
-            <input type="text" class="respuesta">
-        </div>
-
-        <div class="division_caja">
-            <div class="division_caja_numero"></div>
-            <p> / </p>
-            <div class="division_caja_numeroDos"></div>
-            <p> = </p>
-            <input type="text" class="respuesta">
-        </div>
-
-        <div class="division_caja">
-            <div class="division_caja_numero"></div>
-            <p> / </p>
-            <div class="division_caja_numeroDos"></div>
-            <p> = </p>
-            <input type="text" class="respuesta">
-        </div>
-
-        <div class="division_caja">
-            <div class="division_caja_numero"></div>
-            <p> / </p>
-            <div class="division_caja_numeroDos"></div>
-            <p> = </p>
-            <input type="text" class="respuesta">
-        </div>
-
-        <div class="division_info">
-            <p id="intentos_division">intentos</p>
-            <p id="puntos_division">puntos</p>
-        </div>
-
-    </section>
 
     </main>
-    
-    <nav>
-        <ul>
-            <li>
-                <a href="pages/sumas.html" target="_blank">
-                    <img src="assets/suma.png" alt="simbolo de adicion o suma">
-                </a>
-                <a href="pages/sumas.html" target="_blank">SUMAS</a>
-            </li>
-            <li>
-                <a href="pages/restas.html" target="_blank">
-                    <img src="assets/resta.png" alt="simbolo de resta">
-                </a>
-                <a href="pages/restas.html" target="_blank">RESTAS</a>
-            </li>
-            <li>
-                <a href="pages/multiplicacion.html" target="_blank">
-                    <img src="assets/Multiplicar.png" alt="simbolo X de multiplicar">
-                </a>
-                <a href="pages/multiplicacion.html" target="_blank">MULTIPLICACIOM</a>
-            </li>
-            <li>
-                <a href="pages/division.html" target="_blank">
-                    <img src="assets/dividir.png" alt="simbolo de division">
-                </a>
-                <a href="pages/division.html" target="_blank">DIVISION</a>
-            </li>
-        </ul>
-    </nav>
+    <aside class="ocultar" id="aside_tabla">
+        <table>
+            <tr class="tabla_tipos">
+                <td>Sumas</td>
+                <td>Resta</td>
+                <td>Multiplicacion</td>
+                <td>Division</td>
+                <td>Total</td>
+            </tr>
+            <tr class="tabla_puntajes">
+                <td id="punto_suma">0</td>
+                <td id="punto_resta">0</td>
+                <td id="punto_multiplicacion">0</td>
+                <td id="punto_division">0</td>
+                <td id="puntos_total">0</td>
+            </tr>
+            <tr class="tabla_calificacion">
+                <td id="calificacion_suma">""</td>
+                <td id="calificacion_resta">""</td>
+                <td id="calificacion_multiplicacion">""</td>
+                <td id="calificacion_division">""</td>
+                <td id="calificacion_total">""</td>
+            </tr>
+        </table>
+        <button onclick="reset()">Reset</button>
+    </aside>
 
     <footer>
         <h2>ningun derecho reservado</h2>
     </footer>
 
     <script src="./js/calculos.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
 

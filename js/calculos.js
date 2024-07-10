@@ -1,114 +1,3 @@
-class ClassCalculos {
-    constructor (num,num1){
-        this.num= num;
-        this.num1= num1;
-    }
-
-    sumar(){
-        return this.num+this.num1;
-    }
-    restar(){
-        return this.num - this.num1
-    }
-    multiplicar(){
-        return this.num* this.num1
-    }
-    dividir(){
-        return this.num / this.num1
-    }
-    elResto(){
-        return this.num % this.num1
-    }
-    factores(){ 
-
-        let arrayFactores = [];
-        
-        for (let i = 1; i <= this.num; i++){
-
-            let buscando = this.num % i;
-
-            if (buscando === 0){
-                arrayFactores.push(i);
-            }
-        } return arrayFactores.join(' - ');
-    }
-}
-
-function funcionSumar(){
-    alert('Has elegido Sumar dos numeros');
-
-    let num = parseInt(prompt('Primer numero a sumar'));
-    let num1 = parseInt(prompt('Segundo numero a sumar'));
-
-    if (isNaN(num) || isNaN(num1)){
-        alert('-ERROR: No es un numero');
-    } else{
-        let resultado = new ClassCalculos(num,num1)
-        alert('Tus Numeros '+num+' y '+num1+' Suman '+resultado.sumar());
-    }
-}
-
-function funcionRestar(){
-    alert('Has elegido Restar dos numeros');
-
-    let num = parseInt(prompt('Primer numero a Restar'));
-    let num1 = parseInt(prompt('Segundo numero a Restar'));
-
-    if (isNaN(num) || isNaN(num1)){
-        alert('-ERROR- *Eso no es un numero*');
-    } else{
-        let resultado = new ClassCalculos(num,num1)
-        alert('Tus Numeros '+num+' y '+num1+' Restan '+resultado.restar());
-    }
-}
-
-function funcionMultiplicar(){
-    alert('Vamos a Multiplicar');
-    
-    let num = parseInt(prompt('Dame un numero'));
-    let num1 = parseInt(prompt('Dame otro'));
-
-    if (isNaN(num) || isNaN(num1)){
-        alert('Esto no es Algebra. Menos 10 puntos');
-    } else{
-        let resultado = new ClassCalculos(num,num1);
-        alert('La Multiplicación de '+num+' por '+num1+' son '+resultado.multiplicar());
-    }
-}
-
-function funcionDividir(){
-    alert('A dividir entonces');
-
-    let num = parseInt(prompt('Numerito? Por Favor.'));
-    let num1 = parseInt(prompt('Me da Otro?.'));
-
-    if (isNaN(num) || isNaN(num1)){
-        alert('ERROR--Letra Detectada--ERROR');
-    } else if (num === 0 || num1 === 0) {
-        alert('No puedes dividir entre Cero, por que es Infinito');
-    } else{
-        let resultado = new ClassCalculos(num,num1);
-        alert('La Division de '+num+' partido en '+num1+' dan '+Math.trunc(resultado.dividir())+
-                ' y sobran '+resultado.elResto());
-    }
-}
-
-function funcionFactores(){
-    alert('Has elegido encontrar Factores');
-
-    let num = parseInt(prompt('Ingresa un numero "De Preferencia: no mas de 7 Digitos"'));
-    
-    if (num === 0){
-        alert('¡¿Como va a tener Factores el Cero?!, menos 0.000 Puntos');
-    } else if (isNaN(num)) {
-        alert('!!NO LETRAS, SOLO NUMEROS, NUMEROS¡¡');
-    } else{
-
-        let resultados = new ClassCalculos(num);
-        alert('Los Factores de '+num+' son '+resultados.factores())
-    }
-}
-
 // decidí crear un constructor para usuarios, con sus registros y todo que ya creé
 // para facilitar agregar dom y Storage
 //reOrdenare el codigo para que sea facil de entender
@@ -152,11 +41,17 @@ class ClassUsuario {
     }
 
     saludarAlUsuario(){
-        alert(`Hola ${this.nombreUsuario}`);
+        Toastify({
+            text: `Hola ${this.nombreUsuario}`,
+            duration: 3000,
+            gravity: "center",
+            position: "center",
+            stopOnFocus: true,
+        }).showToast();
     }
 
     getDatos(){
-        alert(`Usuario = ${this.nombreUsuario}
+        console.log(`Usuario = ${this.nombreUsuario}
             --Puntos--
                 Suma: ${this.puntos.suma}
                 Resta: ${this.puntos.resta}
@@ -182,16 +77,19 @@ function setData() {
 function cargarUsuariosDesdeLocalStorage() {
     let usuarios = localStorage.getItem('usuarios');
 
-    if (usuarios) {
-        
-        let usuariosParseados = JSON.parse(usuarios).map(user => {
+    if (usuarios) {  // esta solución me la dio ChatGPT, sé lo que hace
+                    //crea a los usuarios desde el constructor (detalle que no pasó por mi mente)
+                    // con la info del localStorage... mejor preguntar que quedar pegado horas
+                    // cierto?  (me imagino a los pobre programadores de antaño sin esta herramienta)
+        let usuariosDelLocal = JSON.parse(usuarios).map(user => {
             let usuario = new ClassUsuario(user.nombreUsuario);
             usuario.puntos = user.puntos;
             usuario.intentos = user.intentos;
             usuario.registros = user.registros;
             return usuario;
+        
         });
-        return usuariosParseados;
+        return usuariosDelLocal;
     } else {
         return [];
     }
@@ -219,7 +117,19 @@ function registrarUsuario() {
         msj.innerHTML = `Hola ${usuario.nombreUsuario}, te has registrado correctamente`;
         setData();
     }
+
+    actualizarTabla();
+    mostrarTabla();
+
 }
+
+function actualizarDatosUsuario(tipo) {
+    document.getElementById(`intentos_${tipo}`).innerText = `Intentos: ${usuario.intentos[tipo]}`;
+    document.getElementById(`puntos_${tipo}`).innerText = `Puntos: ${usuario.puntos[tipo]}`;
+    setData()
+}
+
+
 
 //Terminado el Storage ;D 
 // ahora el Dom *calavera*
@@ -294,11 +204,14 @@ function crearNumerosAleatorios() {
         domNumUno.innerText = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
         domNumDos.innerText = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
         
-        inputDomRespuesta.addEventListener('keypress', function (e) {
+        inputDomRespuesta.addEventListener('keypress', function (e) {  
             if (e.key === 'Enter') {
                 comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'division');
             }
-        });
+        }); //lo probe en mi celular, pero no tiene boton ENTER ja ja ja :cccc 
+            //es decir, para moviles no sirve "xD o xC"
+            // lo parcheare con un "Enter || Click" y crear la funtion para eso :cccc
+            //seguramente para la entregaFinal ya este arreglado ahora no hay tiempo para eso :x
     }
 }
 crearNumerosAleatorios()
@@ -312,243 +225,113 @@ function comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, tipo) {
     let respuestaAlumno = parseInt(inputDomRespuesta.value);
     let correcta = false;
     
-    switch (tipo) {
-        case 'suma':
-            correcta = (num + num1 === respuestaAlumno);
-            break;
-        case 'resta':
-            correcta = (num - num1 === respuestaAlumno);
-            break;
-        case 'multiplicacion':
-            correcta = (num * num1 === respuestaAlumno);
-            break;
-        case 'division':
-            correcta = (Math.trunc(num / num1) === respuestaAlumno);
-            break;
+    if (tipo === 'suma'){
+        correcta = (num + num1 === respuestaAlumno);
+    }
+    if (tipo === 'resta'){
+        correcta = (num - num1 === respuestaAlumno);
+    }
+    if (tipo === 'multiplicacion'){
+        correcta = (num * num1 === respuestaAlumno);
+    }
+    if (tipo === 'division'){
+        correcta = (Math.trunc(num / num1) === respuestaAlumno);
     }
 
-    if (correcta) {
-        usuario.puntos[tipo] += 10;
-        usuario.intentos[tipo]--;
-        inputDomRespuesta.disabled = true;
-        inputDomRespuesta.classList.add('correcto');
+
+    if(usuario.intentos[tipo] > 0 && usuario.intentos[tipo] <= 5){
+        if (correcta) {
+            usuario.puntos[tipo] += 10;
+            usuario.intentos[tipo]--;
+            inputDomRespuesta.disabled = true;
+            inputDomRespuesta.classList.add('correcto');
+        } else {
+            usuario.intentos[tipo]--;
+            inputDomRespuesta.classList.add('incorrecto');
+            inputDomRespuesta.disabled = true;
+        }
+        usuario.agregarRegistro(tipo, num, num1, respuestaAlumno, correcta);
+        
+        actualizarDatosUsuario(tipo);
+
     } else {
-        usuario.intentos[tipo]--;
-        inputDomRespuesta.classList.add('incorrecto');
-    }
-    usuario.agregarRegistro(tipo, num, num1, respuestaAlumno, correcta);
-    actualizarDatosUsuario(tipo);
-
-    if (usuario.intentos[tipo] === 0) {
-        bloquearEjercicios(tipo);
-    }
-}
-
-function actualizarDatosUsuario(tipo) {
-    let intentosDom = document.getElementById(`intentos_${tipo}`);
-    let puntosDom = document.getElementById(`puntos_${tipo}`);
-    
-    intentosDom.innerText = `Intentos: ${usuario.intentos[tipo]}`;
-    puntosDom.innerText = `Puntos: ${usuario.puntos[tipo]}`;
-}
-
-function bloquearEjercicios(tipo) {
-    let inputs = document.getElementsByClassName(`${tipo}_caja`).getElementsByClassName('respuesta');
-    for (let input of inputs) {
-        input.disabled = true;
-    }
-}
-
-
-
-function ejerciciosSuma() {
-
-    if(usuario.intentos.suma <= 5 && usuario.intentos.suma > 0){
-        alert(`Es tu Turno de Sumar :D`);
-
-        let num = Math.floor(Math.random() * 10) + 1;
-        let num1 = Math.floor(Math.random() * 10) + 1;
-        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num}+${num1} =`))
-
-        if(num+num1 === respuestaAlumno){
-
-            usuario.puntos.suma+=10;
-            usuario.intentos.suma--
-
-            alert(`Genial, has acertado: +10 puntos
-                Intentos: ${usuario.intentos.suma}
-                Puntos: ${usuario.puntos.suma}`);
-
-                usuario.agregarRegistro('suma', num, num1, respuestaAlumno, true);
-
-            ejerciciosSuma();
-        } 
-        else if(num+num1!==respuestaAlumno){
-            usuario.intentos.suma--
-            
-            alert(`Oh! esa no era
-                Intentos: ${usuario.intentos.suma}
-                Puntos: ${usuario.puntos.suma}`);
-
-            usuario.agregarRegistro('suma', num, num1, respuestaAlumno, false);
-
-            ejerciciosSuma()
-        }
-    }
-    else{
-        return alert(`Usaste tus 5 intentos para sumar`);
+        Toastify({                     //hice un copiar y pegar e.e desde la documentacion 
+            text: `Usaste tus 5 intentos para ${tipo}`,
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "bottom", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            onClick: function(){} // Callback after click
+        }).showToast();
     } 
-}
-
-function ejerciciosResta() {
-
-    if(usuario.intentos.resta <= 5 && usuario.intentos.resta > 0){
-        alert(`Ahora a Restar`);
-
-        let num = Math.floor(Math.random() * 10) + 1;
-        let num1 = Math.floor(Math.random() * 5) + 1;
-        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num}-${num1} =`))
-
-        if(num-num1 === respuestaAlumno){
-
-            usuario.puntos.resta+=10;
-            usuario.intentos.resta--;
-
-            alert(`Que Bien, Es Correcto: +10 puntos
-                Intentos: ${usuario.intentos.resta}
-                Puntos: ${usuario.puntos.resta}`);
-
-            usuario.agregarRegistro('resta', num, num1, respuestaAlumno, true);
-
-            ejerciciosResta()
-        } 
-        else if(num-num1!==respuestaAlumno){
-            usuario.intentos.resta--
-            
-            alert(`Intentemos De Nuevo
-                Intentos: ${usuario.intentos.resta}
-                Puntos: ${usuario.puntos.resta}`)
-
-                usuario.agregarRegistro('resta', num, num1, respuestaAlumno, false)
-
-            ejerciciosResta()
-        }
-    }
-    else{
-        return alert(`Usaste tus 5 intentos para Restar`);
-    } 
-}
-
-function ejerciciosMultiplicar() {
-
-    if(usuario.intentos.multiplicacion <= 5 && usuario.intentos.multiplicacion > 0){
-        alert(`Vas a Multiplicar :D`);
-
-        let num = Math.floor(Math.random() * 10) + 1;
-        let num1 = Math.floor(Math.random() * 10) + 1;
-        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num} X ${num1} =`))
-
-        if(num*num1 === respuestaAlumno){
-
-            usuario.puntos.multiplicacion+=10;
-            usuario.intentos.multiplicacion--
-
-            alert(`Maravilloso, es correcta: +10 puntos
-                Intentos: ${usuario.intentos.multiplicacion}
-                Puntos: ${usuario.puntos.multiplicacion}`);
-
-                usuario.agregarRegistro('multiplicar', num, num1, respuestaAlumno, true);
-
-                ejerciciosMultiplicar()
-        } 
-        else if(num*num1!==respuestaAlumno){
-            usuario.intentos.multiplicacion--
-            
-            alert(`Intentemos De Nuevo
-                Intentos: ${usuario.intentos.multiplicacion}
-                Puntos: ${usuario.puntos.multiplicacion}`)
-
-                usuario.agregarRegistro('multiplicar', num, num1, respuestaAlumno, false)
-
-                ejerciciosMultiplicar()
-        }
-    }
-    else{
-        return alert(`Usaste tus 5 intentos para Multiplicar`);
-    } 
-}
-
-function ejerciciosDividir() {
-
-    if(usuario.intentos.division <= 5 && usuario.intentos.division > 0){
-        alert(`A partir, a Dividir`);
-
-        let num = Math.floor(Math.random() * 10) + 1;
-        let num1 = Math.floor(Math.random() * 4) + 1;
-        let respuestaAlumno = parseInt(prompt(`Resuelve Esto: ${num} / ${num1} =`))
-
-        if(Math.trunc(num/num1) === respuestaAlumno){
-
-            usuario.puntos.division+=10;
-            usuario.intentos.division--
-
-            alert(`Bravoo, es correcta: +10 puntos
-                Intentos: ${usuario.intentos.division}
-                Puntos: ${usuario.puntos.division}`);
-
-                usuario.agregarRegistro('dividir', num, num1, respuestaAlumno, true)
-
-                ejerciciosDividir()
-        } 
-        else if(num*num1!==respuestaAlumno){
-            usuario.intentos.division--
-            
-            alert(`Intentemos De Nuevo
-                Intentos: ${usuario.intentos.division}
-                Puntos: ${usuario.puntos.division}`)
-
-            usuario.agregarRegistro('dividir', num, num1, respuestaAlumno, false)
-
-            ejerciciosDividir()
-        }
-    }
-    else{
-        return alert(`Se acabaron tus intentos`);
-    } 
+    actualizarTabla();
+    mostrarTabla();
 }
 
 
-function filterCorrectas(objRegistro){
+
+
+
+//filtros de la 2da entrega.... tengo que hacerles DOM a esto tambien? x.x *se muere*
+// tengo pensado hacer una tabla estilo resident evil-mercenarios
+// donde al final te dice todo de todo y una nota S+/S/A/B/C/D/E
+// bueno, me quedan 2 dias :o  // me queda uno, y estoy parcheando cosas :P
+function actualizarTabla() {
+
+    document.getElementById('punto_suma').innerText = usuario.puntos.suma;
+    document.getElementById('punto_resta').innerText = usuario.puntos.resta;
+    document.getElementById('punto_multiplicacion').innerText = usuario.puntos.multiplicacion;
+    document.getElementById('punto_division').innerText = usuario.puntos.division;
+
+    document.getElementById('calificacion_suma').innerText = obtenerCalificacion(usuario.puntos.suma);
+    document.getElementById('calificacion_resta').innerText = obtenerCalificacion(usuario.puntos.resta);
+    document.getElementById('calificacion_multiplicacion').innerText = obtenerCalificacion(usuario.puntos.multiplicacion);
+    document.getElementById('calificacion_division').innerText = obtenerCalificacion(usuario.puntos.division);
+
+    let puntosTotal = usuario.puntos.suma + usuario.puntos.resta + usuario.puntos.multiplicacion + usuario.puntos.division;
+    document.getElementById('puntos_total').innerText = puntosTotal;
+
+    document.getElementById('calificacion_total').innerText = obtenerCalificacionTotal(puntosTotal);
+}
+
+function obtenerCalificacion(puntos) {
+    if (puntos >= 50) return 'S';
+    if (puntos >= 40) return 'A';
+    if (puntos >= 30) return 'B';
+    if (puntos >= 20) return 'C';
+    if (puntos >= 10) return 'D';
+    if (puntos >= 0) return 'F';
+}
+
+function obtenerCalificacionTotal(puntosTotal) {
+    if (puntosTotal >= 200) return 'S+';
+    if (puntosTotal >= 170) return 'S';
+    if (puntosTotal >= 140) return 'A'; // se preguntara de donde saqué estos numeros
+    if (puntosTotal >= 110) return 'B'; // son 200(puntosmaximos) dividido en cada letra 7
+    if (puntosTotal >= 80) return 'C';  // y redondeado ??5 hacia arriba y menos hacia abajo :D 
+    if (puntosTotal >= 60) return 'D';
+    if (puntosTotal >= 30) return 'E';
+    return 'F';
+}
+//Filtro de la 2da entrega sin ninguna funcion actual ABAJO
+/* function filterCorrectas(objRegistro){
     return objRegistro.correcta === true;
 }     
-
 function correctasBotton(){
-
     let respuestasCorrectas = usuario.registros.filter(filterCorrectas);
-
     console.log(`Tienes ${respuestasCorrectas.length} respuestas Correctas`);
     alert(`Tienes ${respuestasCorrectas.length} respuestas Correctas`);
 }
-
-
 function filterIncorrectas(objRegistros){
     return objRegistros.correcta === false;
 }
-
 function incorrectasBotton(){
-
     let respuestasIncorrectas = usuario.registros.filter(filterIncorrectas);
-
-    console.log(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`)
-    alert(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`)
+    console.log(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`);
+    alert(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`);
 }
-
-function filterPorTipo(tipo){
-    return function (objRegistros){
-            return objRegistros.tipo === tipo;
-    }
-}
-
 function tipoDeOperacionBotton(tipo=prompt('Escribe "suma, resta, multiplicacion, division" para filtrar por tipo')){
     
     let respuestasPorTipo = usuario.registros.filter(filterPorTipo(tipo));
@@ -559,4 +342,99 @@ function tipoDeOperacionBotton(tipo=prompt('Escribe "suma, resta, multiplicacion
         numero ${respuestasPorTipo.num1}
         Respuesta del Usuario: ${respuestasPorTipo.respuesta}
         ¿Fue correcta?: ${respuestasPorTipo.correcta}`))
+} */
+//Filtro de la 2da entrega sin ninguna funcion actual ARRIBA
+
+function reset(){
+    if(usuario.intentos.suma === 0 && usuario.intentos.resta === 0
+        && usuario.intentos.multiplicacion === 0 && usuario.intentos.division === 0){
+            
+            usuario.intentos.suma = 5;
+            usuario.intentos.resta = 5;
+            usuario.intentos.multiplicacion = 5;
+            usuario.intentos.division = 5;
+
+            usuario.puntos.suma = 0;
+            usuario.puntos.resta = 0;
+            usuario.puntos.multiplicacion = 0;
+            usuario.puntos.division = 0;
+
+            Toastify({
+                text: `Datos reiniciados`,
+                duration: 3000,
+                gravity: "bottom",
+                position: "center",
+                stopOnFocus: true,
+            }).showToast();
+            
+            actualizarDatosUsuario('suma');
+            actualizarDatosUsuario('resta');
+            actualizarDatosUsuario('multiplicacion');
+            actualizarDatosUsuario('division');
+
+            usuario.registros= [];
+            limpiarInputs()
+            crearNumerosAleatorios()
+            setData();
+
+            //Terminando la tabla :D uffff, ya no quiero mas Dom, me faltan 4 horas para entregar :CC
+            let asideTabla = document.getElementById('aside_tabla');
+            asideTabla.classList.add('ocultar');
+        
+            let allContent = document.body.children;
+            for (let i = 0; i < allContent.length; i++) {
+                allContent[i].style.display = '';
+            }
+        }
+    else{
+        Toastify({
+            text: `Debes acabar todos tus intentos para ReIniciar`,
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "bottom", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            onClick: function(){} // Callback after click
+        }).showToast();
+    }
 }
+
+
+
+function limpiarInputs() {          // es complicado ordenar el codigo y que otros lo entiendan
+                                    // este es un parche pero, lo dejo aqui
+    const inputs = document.querySelectorAll('.respuesta');
+    inputs.forEach(input => {
+        input.value = '';
+        input.disabled = false;
+        input.classList.remove('correcto', 'incorrecto');
+    });
+}
+limpiarInputs()
+
+
+
+function mostrarTabla(){
+    if(usuario.intentos.suma === 0 && usuario.intentos.resta === 0
+        && usuario.intentos.multiplicacion === 0 && usuario.intentos.division === 0){
+
+        actualizarTabla();
+
+        let asideTabla = document.getElementById('aside_tabla');
+        asideTabla.classList.remove('ocultar');
+        console.log(asideTabla);
+
+        let allContent = document.body.children;
+        for (let i = 0; i < allContent.length; i++) {
+            if (allContent[i].id !== 'aside_tabla') {
+                allContent[i].style.display = 'none';
+            }
+        }
+    }
+}
+
+//Al Final, no usé los filtros de la 2da entrega
+//todos los datos que queria estan en el constructor del usuario :D
+// Sobraban para hacer la tabla, no eran necesarios. me da pena borrarlos xD
+// Son como una parte de mi ja jja (mejor las dejo, me pueden servir para otra funcion)

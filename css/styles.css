@@ -60,44 +60,6 @@ header p{
     }
 }
 
-
-nav{
-    display: flex;
-    justify-content: center;
-}
-nav ul{
-    list-style-type: none;
-    display: flex;
-    justify-content: space-evenly;
-    gap: 30px;
-    width: 700px;
-    background-color: #146bc8;
-    border-left: 3px solid black;
-    border-bottom: 3px solid black;
-    border-right: 3px solid black;
-    border-radius: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    -ms-border-radius: 40px;
-    -o-border-radius: 40px;
-}
-
-nav ul li{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-nav ul li img{
-    width: 60px;
-}
-nav ul li a{
-    text-decoration: none;
-    font-size: 1rem;
-    color: #5e1212;
-    font-weight: 700;
-}
-
 main {
     background-color: #146bc82d;
     display: flex;
@@ -113,7 +75,7 @@ main {
     border: 3px solid #2b003f;
 }
 main h2{
-    font-size: 4rem;
+    font-size: 3rem;
     text-align: center;
 }
 main p{
@@ -123,13 +85,10 @@ main p{
 main img{
     width: 300px;
 }
-.div_explicacion{
+
+#ejercicios{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.div_explicacion_p{
-    font-size: 2rem;
+    flex-wrap: wrap;
 }
 
 section {
@@ -166,6 +125,9 @@ main section button{
     color: #610000;
     border: 4px solid rgb(20, 2, 216);
     box-shadow: inset 0 0 0 0 #2602d8;
+    width: 100px;
+    height: 50px;
+    font: 2rem;
 }
 .buttonAzul:hover{
     box-shadow: inset 400px 0 0 0 #3002d8a3;
@@ -229,8 +191,6 @@ main section button{
 }
 
 .sumas_info, .resta_info, .multiplicacion_info, .division_info{
-    position: sticky;
-    align-self: flex-start;
     background-color: rgba(0, 255, 255, 0.300);
     width: 230px;
     border-radius: 10px;
@@ -266,4 +226,75 @@ footer{
     background-color: rgba(25, 25, 112, 0.343);
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+}
+
+#registrarUsuario{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    height: 300px;
+    font-size: 4rem;
+}
+#registrarUsuario label{
+    align-self: center;
+}
+#registrarUsuario input{
+    align-self: center;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    width: 400px;
+    height: 100px;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+#registrarUsuario button{
+    font-size: 2rem;
+    background-color: #2b003f9c;
+    border: 3px solid #660340;
+    color: rgba(255, 228, 196, 0.724);
+}
+
+.ocultar{
+    display: none;
+}
+
+aside{
+    font-family: "margarine";
+    background-image: url("../assets/zorronaranjo.jpg");
+    background-position-y: -200px ;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    border: 10px dotted rgba(100, 0, 194, 0.81);
+    box-shadow: 0 6px 18px black;
+}
+
+table{
+    width: 100%;
+    height: 500px;
+    font-size: 3rem;
+    font-weight: 900;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.941);
+    text-shadow: 0 5px 15px black;
+}
+
+.tabla_tipos{
+    text-decoration-line: underline;
+    -moz-text-decoration-line: underline;
+}
+
+.ocultar{
+    display: none;
 }
