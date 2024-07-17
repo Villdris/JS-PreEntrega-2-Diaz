@@ -75,7 +75,7 @@ main {
     border: 3px solid #2b003f;
 }
 main h2{
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
 }
 main p{
@@ -84,6 +84,15 @@ main p{
 }
 main img{
     width: 300px;
+}
+
+@media(max-width: 1330px){
+    main h2{
+        font-size: 1.6rem;
+    }
+    main p{
+        font-size: 1.6rem;
+    }
 }
 
 #ejercicios{
@@ -98,7 +107,7 @@ section {
     flex-wrap: wrap;
 }
 
-main section button{
+aside button{
         color: #422400;
         border: 4px solid rgb(216, 2, 134);
         border-radius: 20px;
@@ -121,18 +130,6 @@ main section button{
     }
 
 
-.buttonAzul{
-    color: #610000;
-    border: 4px solid rgb(20, 2, 216);
-    box-shadow: inset 0 0 0 0 #2602d8;
-    width: 100px;
-    height: 50px;
-    font: 2rem;
-}
-.buttonAzul:hover{
-    box-shadow: inset 400px 0 0 0 #3002d8a3;
-}
-
 .sumas{
     display: flex;
     flex-direction: column;
@@ -144,6 +141,7 @@ main section button{
     -moz-border-radius: 30px;
     -ms-border-radius: 30px;
     -o-border-radius: 30px;
+    padding: 15px;
 }
 
 .sumas_caja, .resta_caja, .multiplicacion_caja, .division_caja{
@@ -189,6 +187,14 @@ main section button{
     margin-left: 10px;
     margin-right: 10px;
 }
+@media(max-width: 1330px){
+    .sumas_caja_numero, .sumas_caja_numeroDos, .resta_caja_numero, .resta_caja_numeroDos,
+.multiplicacion_caja_numero, .multiplicacion_caja_numeroDos,
+.division_caja_numero, .division_caja_numeroDos{
+    font-size: 2.5rem;
+}
+}
+
 
 .sumas_info, .resta_info, .multiplicacion_info, .division_info{
     background-color: rgba(0, 255, 255, 0.300);
@@ -199,18 +205,8 @@ main section button{
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     bottom: 500px;
+    align-self: center;
 }
-.resta_info{
-    background-color: rgba(0, 0, 255, 0.300);
-}
-@media (max-width: 756px){
-    .sumas_info, .resta_info, .multiplicacion_info, .division_info{
-        position: static;
-    }
-}
-
-
-
 
 .correcto{
     background-color: rgba(0, 128, 0, 0.492);
@@ -232,7 +228,7 @@ footer{
     display: flex;
     flex-direction: column;
     align-self: center;
-    height: 300px;
+    height: 400px;
     font-size: 4rem;
 }
 #registrarUsuario label{
@@ -257,9 +253,10 @@ footer{
     border: 3px solid #660340;
     color: rgba(255, 228, 196, 0.724);
 }
-
-.ocultar{
-    display: none;
+@media(max-width: 1000px){
+    #registrarUsuario{
+        font-size: 3rem;
+    }
 }
 
 aside{
@@ -282,7 +279,7 @@ aside{
 
 table{
     width: 100%;
-    height: 500px;
+    height: 400px;
     font-size: 3rem;
     font-weight: 900;
     text-align: center;
@@ -294,7 +291,51 @@ table{
     text-decoration-line: underline;
     -moz-text-decoration-line: underline;
 }
+@media(max-width: 1000px){
+    .tabla_tipos {
+        font-size: 2rem;
+    }
+}
+@media(max-width: 780px){
+    table {
+        font-size: 2rem;
+        height: 300px;
+    }
+}
 
 .ocultar{
     display: none;
+}
+
+#quien_juega{
+    font-family: "margarine", sans-serif;
+    text-align: center;
+    align-self: flex-start;
+    margin: 40px 560px 40px 560px;
+    font-size: 5rem;
+    background: linear-gradient(to right, #730078, #850056, #870036, #7f001b, #711d00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 20px 60px black;
+}
+@media (max-width: 1310px){
+    #quien_juega{
+        font-size: 4rem;
+    }
+}
+@media (max-width: 600px){
+    #quien_juega{
+        font-size: 3rem;
+    }
+}
+#calificacion_total, #puntos_total{
+    color: powderblue;
+    text-shadow: 0 3px 9px black;
+    background-color: #2b003f8e;
+    font-size: 3rem;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }

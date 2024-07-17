@@ -1,11 +1,3 @@
-// decidí crear un constructor para usuarios, con sus registros y todo que ya creé
-// para facilitar agregar dom y Storage
-//reOrdenare el codigo para que sea facil de entender
-
-/* al ir haciendo el codigo a medida que le agrego cosas queda mal
-    crear una funcion abajo y luego llamarla mas arriba es una llamada al caos MUAJAJA
-*/
-
 class ClassUsuario {
     
     constructor(nombreUsuario){
@@ -62,11 +54,6 @@ class ClassUsuario {
 }
 
 
-
-//Quize hacer el Dom primero, pero se me complico un monton hacer que el registro funcione
-//Asi que me dedique a hacer el Storage que fue mas facil, tuve problemas con la carga de usuarios
-//Ahora ya no c:
-
 let usuario;
 let todosLosUsuarios = cargarUsuariosDesdeLocalStorage();
 
@@ -77,10 +64,8 @@ function setData() {
 function cargarUsuariosDesdeLocalStorage() {
     let usuarios = localStorage.getItem('usuarios');
 
-    if (usuarios) {  // esta solución me la dio ChatGPT, sé lo que hace
-                    //crea a los usuarios desde el constructor (detalle que no pasó por mi mente)
-                    // con la info del localStorage... mejor preguntar que quedar pegado horas
-                    // cierto?  (me imagino a los pobre programadores de antaño sin esta herramienta)
+    if (usuarios) {
+        
         let usuariosDelLocal = JSON.parse(usuarios).map(user => {
             let usuario = new ClassUsuario(user.nombreUsuario);
             usuario.puntos = user.puntos;
@@ -99,6 +84,8 @@ function registrarUsuario() {
     let inputNombre = document.getElementById("nombreUsuario").value;
     
     let usuarioEncontrado = todosLosUsuarios.find(usuario => usuario.nombreUsuario === inputNombre);
+
+    let h2NombreUsuario = document.getElementById('quien_juega');
     
     let msj = document.getElementById('mensaje');
     msj.innerHTML = '';
@@ -108,6 +95,7 @@ function registrarUsuario() {
         usuario.saludarAlUsuario();
         
         msj.innerHTML = `Bienvenido de nuevo, ${usuario.nombreUsuario}`;
+        
     } else {
         usuario = new ClassUsuario(inputNombre);
         
@@ -117,7 +105,9 @@ function registrarUsuario() {
         msj.innerHTML = `Hola ${usuario.nombreUsuario}, te has registrado correctamente`;
         setData();
     }
-
+    h2NombreUsuario.innerText = usuario.nombreUsuario;
+    
+    mostrarEjerciciosYOcultarRegistro()
     actualizarTabla();
     mostrarTabla();
 
@@ -130,9 +120,6 @@ function actualizarDatosUsuario(tipo) {
 }
 
 
-
-//Terminado el Storage ;D 
-// ahora el Dom *calavera*
 function crearNumerosAleatorios() {
     
     let domSumasCajas = document.getElementsByClassName('sumas_caja');
@@ -153,8 +140,6 @@ function crearNumerosAleatorios() {
         });
     }
 
-    //ahora entiendo por que inventarios React :ccccc X.X
-
     let domRestasCajas = document.getElementsByClassName('resta_caja');
     
     for (let i = 0; i < domRestasCajas.length; i++) {
@@ -172,7 +157,6 @@ function crearNumerosAleatorios() {
             }
         });
     }
-
 
     let domMultiplicacionesCajas = document.getElementsByClassName('multiplicacion_caja');
     
@@ -208,10 +192,7 @@ function crearNumerosAleatorios() {
             if (e.key === 'Enter') {
                 comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'division');
             }
-        }); //lo probe en mi celular, pero no tiene boton ENTER ja ja ja :cccc 
-            //es decir, para moviles no sirve "xD o xC"
-            // lo parcheare con un "Enter || Click" y crear la funtion para eso :cccc
-            //seguramente para la entregaFinal ya este arreglado ahora no hay tiempo para eso :x
+        });
     }
 }
 crearNumerosAleatorios()
@@ -255,15 +236,15 @@ function comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, tipo) {
         actualizarDatosUsuario(tipo);
 
     } else {
-        Toastify({                     //hice un copiar y pegar e.e desde la documentacion 
+        Toastify({
             text: `Usaste tus 5 intentos para ${tipo}`,
             duration: 3000,
             newWindow: true,
             close: true,
-            gravity: "bottom", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            onClick: function(){} // Callback after click
+            gravity: "bottom",
+            position: "center",
+            stopOnFocus: true,
+            onClick: function(){}
         }).showToast();
     } 
     actualizarTabla();
@@ -272,12 +253,6 @@ function comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, tipo) {
 
 
 
-
-
-//filtros de la 2da entrega.... tengo que hacerles DOM a esto tambien? x.x *se muere*
-// tengo pensado hacer una tabla estilo resident evil-mercenarios
-// donde al final te dice todo de todo y una nota S+/S/A/B/C/D/E
-// bueno, me quedan 2 dias :o  // me queda uno, y estoy parcheando cosas :P
 function actualizarTabla() {
 
     document.getElementById('punto_suma').innerText = usuario.puntos.suma;
@@ -308,42 +283,13 @@ function obtenerCalificacion(puntos) {
 function obtenerCalificacionTotal(puntosTotal) {
     if (puntosTotal >= 200) return 'S+';
     if (puntosTotal >= 170) return 'S';
-    if (puntosTotal >= 140) return 'A'; // se preguntara de donde saqué estos numeros
-    if (puntosTotal >= 110) return 'B'; // son 200(puntosmaximos) dividido en cada letra 7
-    if (puntosTotal >= 80) return 'C';  // y redondeado ??5 hacia arriba y menos hacia abajo :D 
+    if (puntosTotal >= 140) return 'A';
+    if (puntosTotal >= 110) return 'B'; 
+    if (puntosTotal >= 80) return 'C';
     if (puntosTotal >= 60) return 'D';
     if (puntosTotal >= 30) return 'E';
     return 'F';
 }
-//Filtro de la 2da entrega sin ninguna funcion actual ABAJO
-/* function filterCorrectas(objRegistro){
-    return objRegistro.correcta === true;
-}     
-function correctasBotton(){
-    let respuestasCorrectas = usuario.registros.filter(filterCorrectas);
-    console.log(`Tienes ${respuestasCorrectas.length} respuestas Correctas`);
-    alert(`Tienes ${respuestasCorrectas.length} respuestas Correctas`);
-}
-function filterIncorrectas(objRegistros){
-    return objRegistros.correcta === false;
-}
-function incorrectasBotton(){
-    let respuestasIncorrectas = usuario.registros.filter(filterIncorrectas);
-    console.log(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`);
-    alert(`Tienes ${respuestasIncorrectas.length} respuestas erroneas`);
-}
-function tipoDeOperacionBotton(tipo=prompt('Escribe "suma, resta, multiplicacion, division" para filtrar por tipo')){
-    
-    let respuestasPorTipo = usuario.registros.filter(filterPorTipo(tipo));
-    
-    respuestasPorTipo.forEach((respuestasPorTipo)=>
-        alert(`Operacion: ${respuestasPorTipo.tipo}
-        numero ${respuestasPorTipo.num}
-        numero ${respuestasPorTipo.num1}
-        Respuesta del Usuario: ${respuestasPorTipo.respuesta}
-        ¿Fue correcta?: ${respuestasPorTipo.correcta}`))
-} */
-//Filtro de la 2da entrega sin ninguna funcion actual ARRIBA
 
 function reset(){
     if(usuario.intentos.suma === 0 && usuario.intentos.resta === 0
@@ -377,7 +323,6 @@ function reset(){
             crearNumerosAleatorios()
             setData();
 
-            //Terminando la tabla :D uffff, ya no quiero mas Dom, me faltan 4 horas para entregar :CC
             let asideTabla = document.getElementById('aside_tabla');
             asideTabla.classList.add('ocultar');
         
@@ -392,18 +337,18 @@ function reset(){
             duration: 3000,
             newWindow: true,
             close: true,
-            gravity: "bottom", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            onClick: function(){} // Callback after click
+            gravity: "bottom",
+            position: "center",
+            stopOnFocus: true,
+            onClick: function(){}
         }).showToast();
     }
 }
 
 
 
-function limpiarInputs() {          // es complicado ordenar el codigo y que otros lo entiendan
-                                    // este es un parche pero, lo dejo aqui
+function limpiarInputs() {
+
     const inputs = document.querySelectorAll('.respuesta');
     inputs.forEach(input => {
         input.value = '';
@@ -412,7 +357,6 @@ function limpiarInputs() {          // es complicado ordenar el codigo y que otr
     });
 }
 limpiarInputs()
-
 
 
 function mostrarTabla(){
@@ -434,7 +378,28 @@ function mostrarTabla(){
     }
 }
 
-//Al Final, no usé los filtros de la 2da entrega
-//todos los datos que queria estan en el constructor del usuario :D
-// Sobraban para hacer la tabla, no eran necesarios. me da pena borrarlos xD
-// Son como una parte de mi ja jja (mejor las dejo, me pueden servir para otra funcion)
+/* PROYECTO FINAL
+    De momento voy a parchear cosas aqui abajo :D
+    Y dar estilos, nada mas... no sé que API usar.
+    La del clima?.
+*/
+
+function mostrarEjerciciosYOcultarRegistro() {
+    
+    let cajaEjerciciosDom = document.querySelector('.ocultar');
+    let cajaRegistroDom = document.getElementById('registrarUsuario');
+
+    let allContent = cajaRegistroDom.children;
+    for (let i = 0; i < allContent.length; i++) {
+        if (allContent[i].id !== 'mensaje') {
+            allContent[i].style.display = 'none';
+        }
+    }
+    
+    setTimeout(function() {              //Mi Primera Asincronia :DD
+        cajaEjerciciosDom.id = 'ejercicios';
+        
+        cajaRegistroDom.removeAttribute('id');
+        cajaRegistroDom.classList.add('ocultar');
+    }, 2000);
+}
