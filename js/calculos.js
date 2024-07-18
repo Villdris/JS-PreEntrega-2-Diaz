@@ -17,12 +17,12 @@ class ClassUsuario {
             division: 5,
         }
 
-        this.registros= [];
+        this.datosTabla= [];
     }
 
 
     agregarRegistro(tipo, num, num1, respuesta, correcta){
-        this.registros.push({
+        this.datosTabla.push({
             tipo: tipo,
             num: num,
             num1: num1,
@@ -94,7 +94,7 @@ function registrarUsuario() {
         usuario = usuarioEncontrado;
         usuario.saludarAlUsuario();
         
-        msj.innerHTML = `Bienvenido de nuevo, ${usuario.nombreUsuario}`;
+        msj.innerHTML = `Bienvenido de nuevo<br><span id="quien_juega">${usuario.nombreUsuario}</span>`;
         
     } else {
         usuario = new ClassUsuario(inputNombre);
@@ -102,15 +102,30 @@ function registrarUsuario() {
         todosLosUsuarios.push(usuario);
         usuario.saludarAlUsuario();
         
-        msj.innerHTML = `Hola ${usuario.nombreUsuario}, te has registrado correctamente`;
-        setData();
+        msj.innerHTML = `Te has registrado correctamente<br><span id="quien_juega">${usuario.nombreUsuario}</span>`;
+
+        setTimeout(function() {           //Mi Segunda Asincronia :DD
+            Swal.fire({                   //Alerta copiar y pegar desde la documentacion :P
+                title: "¿Como Jugar?",
+                text: "Al escribir la respuesta puedes presionar la tecla ENTER o la Barra Espaciadora",
+                icon: "info"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "Vamos",
+                        text: "Has entendido muy bien!",
+                        icon: "success"
+                    });
+                    }
+                });
+        }, 3000);
+
+            setData();
     }
     h2NombreUsuario.innerText = usuario.nombreUsuario;
     
     mostrarEjerciciosYOcultarRegistro()
     actualizarTabla();
-    mostrarTabla();
-
 }
 
 function actualizarDatosUsuario(tipo) {
@@ -134,7 +149,7 @@ function crearNumerosAleatorios() {
         domNumDos.innerText = Math.floor(Math.random() * 10) + 1;
         
         inputDomRespuesta.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' || e.key === ' ') {
                 comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'suma');
             }
         });
@@ -152,7 +167,7 @@ function crearNumerosAleatorios() {
         domNumDos.innerText = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
         
         inputDomRespuesta.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' || e.key === ' ') {
                 comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'resta');
             }
         });
@@ -170,7 +185,7 @@ function crearNumerosAleatorios() {
         domNumDos.innerText = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
         
         inputDomRespuesta.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' || e.key === ' ') {
                 comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'multiplicacion');
             }
         });
@@ -189,7 +204,7 @@ function crearNumerosAleatorios() {
         domNumDos.innerText = Math.floor(Math.random() * (5 - 1 + 1)) + 1;
         
         inputDomRespuesta.addEventListener('keypress', function (e) {  
-            if (e.key === 'Enter') {
+            if (e.key === ' ' || e.key === 'Enter') {
                 comprobarRespuesta(domNumUno, domNumDos, inputDomRespuesta, 'division');
             }
         });
@@ -401,5 +416,6 @@ function mostrarEjerciciosYOcultarRegistro() {
         
         cajaRegistroDom.removeAttribute('id');
         cajaRegistroDom.classList.add('ocultar');
+        mostrarTabla();
     }, 2000);
 }

@@ -218,21 +218,57 @@ aside button{
 footer{
     display: flex;
     align-items: center;
-    height: 200px;
-    background-color: rgba(25, 25, 112, 0.343);
+    height: 300px;
+    background-image: url(../assets/nino.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: -500px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+}
+.gradiente{
+    background-image:  linear-gradient(to right top, #94009482, #7035a17f, #4a48a47a, #21539d7b, #0059907e);
+    width: 100%;
+    height: 100%;
+    align-content: center;
+}
+@media(max-width: 1200px){
+    footer{
+        background-position-y: -350px;
+    }
+}
+@media(max-width: 890px){
+    footer{
+        background-position-y: -150px;
+    }
+}
+@media(max-width: 450px){
+    footer{
+        background-position-y: 0;
+    }
 }
 
 #registrarUsuario{
     display: flex;
     flex-direction: column;
     align-self: center;
-    height: 400px;
+    height: 300px;
     font-size: 4rem;
+    background-color: rgba(153, 205, 50, 0.164);
+    padding: 20px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    box-shadow: 0 3px 9px black;
+    margin: 30px;
+    justify-content: center;
 }
 #registrarUsuario label{
     align-self: center;
+    color: #2b003f;
+    text-shadow: 0 3px 9px rgb(147, 0, 76);
 }
 #registrarUsuario input{
     align-self: center;
@@ -246,6 +282,8 @@ footer{
     font-size: 3rem;
     text-align: center;
     margin-bottom: 20px;
+    color: #5630009c;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.322);
 }
 #registrarUsuario button{
     font-size: 2rem;
@@ -253,9 +291,43 @@ footer{
     border: 3px solid #660340;
     color: rgba(255, 228, 196, 0.724);
 }
+#mensaje{
+    color: #2b003f;
+    font-weight: 600;
+    font-size: 3rem;
+    text-align: center;
+}
 @media(max-width: 1000px){
     #registrarUsuario{
         font-size: 3rem;
+        height: 250px;
+    }
+    #registrarUsuario input{
+        font-size: 2.5rem;
+        width: 300px;
+        height: 70px;
+    }
+
+}
+@media(max-width: 580px){
+    #registrarUsuario{
+        font-size: 2rem;
+        text-align: center;
+        font-weight: 600;
+        height: 240px;
+    }
+    #registrarUsuario input{
+        width: 240px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    #registrarUsuario button{
+        width: 120px;
+        align-self: center;
+        font-size: 1.5rem;
+    }
+    #mensaje{
+        font-size: 1.6rem;
     }
 }
 
@@ -266,7 +338,7 @@ aside{
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    margin: 10px;
+    margin: 60px 10px 0 10px;
     padding: 20px;
     border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -311,21 +383,19 @@ table{
     font-family: "margarine", sans-serif;
     text-align: center;
     align-self: flex-start;
-    margin: 40px 560px 40px 560px;
+    max-width: 320px;
+    min-width: 100%;
     font-size: 5rem;
     background: linear-gradient(to right, #730078, #850056, #870036, #7f001b, #711d00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 20px 60px black;
-}
-@media (max-width: 1310px){
-    #quien_juega{
-        font-size: 4rem;
-    }
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 @media (max-width: 600px){
     #quien_juega{
-        font-size: 3rem;
+        font-size: 12vw;
     }
 }
 #calificacion_total, #puntos_total{
