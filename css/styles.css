@@ -142,6 +142,7 @@ aside button{
     -ms-border-radius: 30px;
     -o-border-radius: 30px;
     padding: 15px;
+    margin-bottom: 30px;
 }
 
 .sumas_caja, .resta_caja, .multiplicacion_caja, .division_caja{
@@ -165,6 +166,14 @@ aside button{
 .division_caja{
     background-color: rgba(170, 3, 176, 0.543);
 }
+@media(max-width: 400px){
+    .sumas{
+        padding: 5px;
+    }
+    .sumas_caja, .resta_caja, .multiplicacion_caja, .division_caja{
+        padding: 5px;
+    }
+}
 
 
 .respuesta{
@@ -178,6 +187,7 @@ aside button{
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    justify-self: center;
 }
 
 .sumas_caja_numero, .sumas_caja_numeroDos, .resta_caja_numero, .resta_caja_numeroDos,
@@ -192,7 +202,15 @@ aside button{
 .multiplicacion_caja_numero, .multiplicacion_caja_numeroDos,
 .division_caja_numero, .division_caja_numeroDos{
     font-size: 2.5rem;
+    margin-left: 3px;
+    margin-right: 3px;
 }
+    .respuesta{
+        font-size: 2.5rem;
+        width: 60px;
+        height: 50px;
+
+    }
 }
 
 
@@ -408,4 +426,37 @@ table{
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
+}
+
+.sumas_caja_boton, .resta_caja_boton, .multiplicacion_caja_boton, .division_caja_boton{
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+    width: 50px;
+    height: 50px;
+    background-color: #ee870ae7;
+    align-self: center;
+    justify-self: center;
+    margin: 5px;
+    box-shadow: 0 2px 6px black;
+}
+.resta_caja_boton{
+    background-color: rgba(153, 205, 50, 0.775);
+}
+.multiplicacion_caja_boton{
+    background-color: #146bc869;
+}
+.division_caja_boton{
+    background-color: #3d00427d;
+}
+
+.solo_moviles {
+    display: none;
+}
+@media (max-width: 720px) {
+    .solo_moviles {
+        display: inline-block;
+    }
 }
