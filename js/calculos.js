@@ -70,7 +70,7 @@ function cargarUsuariosDesdeLocalStorage() {
             let usuario = new ClassUsuario(user.nombreUsuario);
             usuario.puntos = user.puntos;
             usuario.intentos = user.intentos;
-            usuario.registros = user.registros;
+            usuario.datosTabla = user.datosTabla;
             return usuario;
         
         });
@@ -123,9 +123,10 @@ function registrarUsuario() {
             setData();
     }
     h2NombreUsuario.innerText = usuario.nombreUsuario;
-    
+
     mostrarEjerciciosYOcultarRegistro()
     actualizarTabla();
+    console.log(usuario.datosTabla)
 }
 
 function actualizarDatosUsuario(tipo) {
@@ -433,7 +434,6 @@ function mostrarTabla(){
 
         let asideTabla = document.getElementById('aside_tabla');
         asideTabla.classList.remove('ocultar');
-        console.log(asideTabla);
 
         let allContent = document.body.children;
         for (let i = 0; i < allContent.length; i++) {
@@ -455,6 +455,8 @@ function mostrarEjerciciosYOcultarRegistro() {
     let cajaEjerciciosDom = document.querySelector('.ocultar');
     let cajaRegistroDom = document.getElementById('registrarUsuario');
 
+    let apiTriviaDom = document.getElementsByClassName('ocultar')[1];
+
     let allContent = cajaRegistroDom.children;
     for (let i = 0; i < allContent.length; i++) {
         if (allContent[i].id !== 'mensaje') {
@@ -464,9 +466,12 @@ function mostrarEjerciciosYOcultarRegistro() {
     
     setTimeout(function() {              //Mi Primera Asincronia :DD
         cajaEjerciciosDom.id = 'ejercicios';
+        apiTriviaDom.id = 'apiTrivia';
         
         cajaRegistroDom.removeAttribute('id');
         cajaRegistroDom.classList.add('ocultar');
+        apiTriviaDom.classList.remove('ocultar'); 
+
         mostrarTabla();
     }, 2000);
 }
@@ -508,3 +513,101 @@ function clonesDeNodos() {
         caja.parentNode.replaceChild(clon, caja);
     });
 }
+
+//API
+
+// API terminada, esta api solo tiene 10 preguntas, de las cuales solo pondre 3
+// son aleatorias gracias a sort que las reordena :D me quedo con las 3 primeras :D
+// tardé mas en hacer el header con la autorizacion, en la documentacion salia Header con H mayus
+// fue un pequeño gran dolor de cabeza 
+function apiTrivia(){
+
+    let apiKey = '$2b$12$pgrc4itYadTJmQLKbBITnuZstXJkq0u77JF8v7XzxFTb3wOPA/6oC ';
+    let options ={
+        method:'GET',
+        headers:{
+            'Authorization': `${apiKey}`
+        }
+    } 
+
+fetch(`https://api.quiz-contest.xyz/questions?limit=10&page=1&category=science%26nature&format=boolean`, options)
+    .then( response => response.json())
+    .then( data => apiDatos(data))
+    .catch( error => console.log(error))
+
+    function apiDatos(data){
+        let apiTriviaDom = document.getElementsByClassName('ocultar')[1];
+        let preguntas = data.questions;
+
+        let preguntasAlAzar = preguntas.sort(() => Math.random() - 0.5);
+
+        for(let i = 0; i < 3; i++){
+            let article = document.createElement('article');
+            
+            let preguntaParrafo = document.createElement('p');
+            preguntaParrafo.innerText = preguntasAlAzar[i].question;
+            
+            let botonVerdadero = document.createElement('button');
+            botonVerdadero.innerText = 'Verdadero';
+            botonVerdadero.classList.add('botonVerdadero')
+            
+            let botonFalso = document.createElement('button');
+            botonFalso.innerText = 'Falso';
+            botonFalso.classList.add('botonFalso')
+
+            botonVerdadero.addEventListener('click', () => {
+                verificarRespuestaTrivia(preguntaParrafo, 'Verdadero', preguntasAlAzar[i].correctAnswers);
+            });
+            botonFalso.addEventListener('click', () => {
+                verificarRespuestaTrivia(preguntaParrafo, 'Falso', preguntasAlAzar[i].correctAnswers);
+            });
+
+            article.append(preguntaParrafo);
+            article.append(botonVerdadero);
+            article.append(botonFalso);
+
+            apiTriviaDom.append(article);
+        }
+
+        function verificarRespuestaTrivia(parrafo, boton, respuestaCorrecta) {
+            if (boton === respuestaCorrecta) {
+                parrafo.innerText = 'CORRECTO'
+                parrafo.classList.add('correcto');
+            } else {
+                parrafo.classList.add('incorrecto');
+                parrafo.innerText = 'FALLASTE'
+            }
+            
+            setTimeout(() => {
+                parrafo.parentElement.style.display = 'none';
+            }, 2000);
+        }
+    }
+    
+    }
+apiTrivia();
+// Pensé en mezclar dos Apis de preguntas, fallando rotundamente, ya que 10 preguntas son pocas
+// le pedí ayuda a chatGPT pero no entendi naada de nada asi que lo descarté
+// hoy 25 de Julio, pienso en agregar la pokeApi, y en la tabla salga un pokemon aleatorio como regalo :D
+
+function pokeApi(){
+    let pokeArticle = document.getElementById('poke_api');
+    let pokemonRandom= Math.floor(Math.random() * 151);//Son un monton :P
+
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonRandom}`)
+    .then(response => response.json())
+    .then(data => pokeDatos(data))
+    .catch(error => console.log(error))
+
+    function pokeDatos(data){
+        console.log(data)
+
+        let pokeNombre = data.species.name;
+
+        let pokeImg = data.sprites.other.home.front_default;
+
+        pokeArticle.innerHTML += `<h4>${pokeNombre}<br>(${pokemonRandom})</h4>
+        <img src=${pokeImg}>`
+    }
+}
+pokeApi()

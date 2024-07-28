@@ -228,9 +228,19 @@ aside button{
 
 .correcto{
     background-color: rgba(0, 128, 0, 0.492);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 .incorrecto{
     background-color: rgba(255, 0, 0, 0.536);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
 footer{
@@ -363,7 +373,7 @@ aside{
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
-    border: 10px dotted rgba(100, 0, 194, 0.81);
+    border: 10px double rgba(100, 0, 194, 0.81);
     box-shadow: 0 6px 18px black;
 }
 
@@ -458,5 +468,93 @@ table{
 @media (max-width: 720px) {
     .solo_moviles {
         display: inline-block;
+    }
+}
+
+#apiTrivia{
+    display: flex;
+    flex-direction: column;
+}
+#apiTrivia article{
+    padding: 10px;
+    width: 100%;
+    border: 3px solid rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 9px rgba(125, 0, 96, 0.6);
+    text-align: center;
+    background-color: #ff58587c;
+}
+#apiTrivia article button{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    margin: 10px;
+    font-size: 1rem;
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.6);
+}
+.botonVerdadero{
+    background-color: rgba(0, 255, 136, 0.5);
+    border: 2px double rgba(255, 255, 0, 0.5);
+}
+.botonFalso{
+    background-color: rgba(255, 0, 140, 0.5);
+    border: 2px double rgba(255, 153, 0, 0.5);
+}
+@media(max-width: 748px){
+    #apiTrivia article{
+        font-size: 1.5rem;
+    }
+}
+
+.reset_y_pokeapi{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.reset_y_pokeapi button{
+    height: 60px;
+    align-self: flex-end;
+}
+
+#poke_api{
+    border: 5px dotted black;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+    background-color: #146bc87f;
+}
+
+#poke_api img{
+    width: 400px;
+}
+#poke_api h3{
+    text-align: center;
+}
+#poke_api h4{
+    font-size: 1.5rem;
+    background-color:#2b003fad;
+    color: #ff5958;
+    text-align: center;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+}
+@media(max-width: 484px){
+    #poke_api img{
+        width: 280px;
     }
 }
