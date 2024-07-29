@@ -17,7 +17,7 @@ El primer .filter() tiene un error,sé como arreglarlo pero no lo e quitado para
 
 ---- GithubPages: https://villdris.github.io/JS-PreEntrega-2-Diaz/ ----
 
-### (NUEVO) Tercera Entrega:
+### Tercera Entrega:
 Todo lo anterior   
 hago este READMI a las 22.20 y debo entregar a las 22.59 (horaChile).    
 Todo funciona correcto en PC, para movil lo haré despues, no tengo tiempo :P   
@@ -31,4 +31,16 @@ Segun mi criterio,esta entrega cumple con todo lo pedido:
     
 el codigo se entiende bien, las funciones tienen un nombre muy aclarativo y algunos detalles estan comentados en el codigo.
 
----- GithubPages: https://villdris.github.io/JS-PreEntrega-2-Diaz/ ----
+---- GithubPages: https://villdris.github.io/JS-PreEntrega-2-Diaz/ ----   
+
+### (NUEVO) Proyecto-Final  
+
+Según la última clase, estos eran los requisitos:  
+
+1-Librería de uso relevante: Utilicé SweetAlert para los que recién se registran, aparece una vez nada más.   
+Toastify que solo notifica eventos importantes, como: Saludar cada vez que se entra, te avisa cuando te quedas sin intentos al jugar y al hacer reset nos dará un aviso :D.   
+   
+2-Manejo de promesas con fetch: Aquí llamé a dos apis, una de trivia " https://www.quiz-contest.xyz/ " (fue la primera que me salió en Google) solo posee diez preguntas por link, así que solo utilicé tres al azar cada vez que se recarga la página.   
+Y la pokeApi, al acabar los intentos aparecerá una tabla con un pokemon aleatorio como recompensa (mi sobrina feliz :D).  
+
+3-Datos desde un JSON local o una api externa: Todos los datos JSON de ambas apis las manejé dentro de una función en fetch.
