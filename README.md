@@ -15,7 +15,6 @@ METODOS DE BUSQUEDA: tiene 3 .filter() y un forEach, pensé en agregar un .find(
 
 El primer .filter() tiene un error,sé como arreglarlo pero no lo e quitado para que vea esa anomalia. No me quite puntos por eso :c
 
----- GithubPages: https://villdris.github.io/JS-PreEntrega-2-Diaz/ ----
 
 ### Tercera Entrega:
 Todo lo anterior   
@@ -31,7 +30,6 @@ Segun mi criterio,esta entrega cumple con todo lo pedido:
     
 el codigo se entiende bien, las funciones tienen un nombre muy aclarativo y algunos detalles estan comentados en el codigo.
 
----- GithubPages: https://villdris.github.io/JS-PreEntrega-2-Diaz/ ----   
 
 ### (NUEVO) Proyecto-Final  
 
@@ -44,3 +42,5 @@ Toastify que solo notifica eventos importantes, como: Saludar cada vez que se en
 Y la pokeApi, al acabar los intentos aparecerá una tabla con un pokemon aleatorio como recompensa (mi sobrina feliz :D).  
 
 3-Datos desde un JSON local o una api externa: Todos los datos JSON de ambas apis las manejé dentro de una función en fetch.
+
+gitHub-pages: -- https://villdris.github.io/JS-ProyectoFinal-Diaz/ --
